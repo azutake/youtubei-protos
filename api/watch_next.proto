@@ -1,0 +1,293 @@
+syntax = "proto3";
+
+import "google/protobuf/duration.proto";
+import "common.proto";
+import "command.proto";
+package pfinnertube;
+
+message NextRequest {
+    Context context = 1;
+    string video_id = 2;
+}
+
+message SingleColumnWatchNextResultsResultsResults {
+    repeated Renderer contents = 1;
+}
+
+message SingleColumnWatchNextResultsResults {
+    SingleColumnWatchNextResultsResultsResults results              = 49399797;
+}
+
+message SingleColumnWatchNextResults {
+    SingleColumnWatchNextResultsResults results = 1;
+}
+
+message NextContents {
+    SingleColumnWatchNextResults single_column_watch_next_results   = 51779735;
+}
+
+message FrameworkUpdates {
+    message EntityBatchUpdate {
+        message Mutation {
+            message Payload {
+                message CommentSharedEntityPayload {
+                    message QuickEmoji {
+                        string key = 1;
+                        bytes tracking_params = 2;
+                        LoggingDirectives logging_directives = 999;
+                    }
+
+                    string key = 1;
+                    repeated QuickEmoji quick_emojis = 9 [packed = false];
+                }
+
+                message SubscriptionStateEntity {
+                    string key = 1;
+                    bool subscribed = 2;
+                }
+
+                message SubscriptionNotificationSetting {
+                    string key = 1;
+                    SubscriptionNotificationSettingState state = 2;
+                }
+
+                message LikeStatusEntity {
+                    string key = 1;
+                    LikeStatus like_status = 2;
+                }
+
+                message SubscriptionNotificationStateEntity {
+                    string key = 1;
+                    SubscriptionNotificationState state = 2;
+                }
+
+                message FilterChipBarEntity {
+                    message FilterChipData {
+                        message ActiveContentData {
+                            message ChipData {
+                                string text = 1;
+                                string original_text = 2;
+                                bool selected = 3;
+                            }
+
+                            message SortingFiltering {
+                                message CommentsFilter {
+                                    message AuthorRelationIn {
+                                        repeated AuthorRelation values = 1;
+                                    }
+
+                                    AuthorRelationIn author_relation_in = 2;
+                                    SortBy sort_by = 7;
+                                    bool fetch_only_top_level_comments_by_sponsors = 8;
+                                }
+
+                                CommentsFilter comments_filter = 3;
+                            }
+
+                            ChipData chip_data = 1;
+                            SortingFiltering sorting_filtering = 2;
+                            ChipIcon chip_icon = 5;
+                        }
+
+                        string id = 1;
+                        ActiveContentData active_content_data = 2;
+                        string modal_id = 6;
+                    }
+
+                    string key = 1;
+                    repeated FilterChipData filter_chip_data = 3;
+                }
+
+                message CommentComposerControlsEntityPayload {
+                    string key = 1;
+                    string create_comment_params = 2;
+                }
+
+                message CommentComposerTextStateEntityPayload {
+                    string key = 1;
+                    InnertubeCommand dismiss_dialog_command = 19;
+                }
+
+                message CommentComposerButtonStateEntityPayload {
+                    string key = 1;
+                    bool is_timestamp_button_enabled = 2;
+                    bool is_sending = 4;
+                    bool is_emoji_picker_enabled = 5;
+                    bool is_emoji_picker_toggled = 6;
+                    bool is_timestamp_button_supported = 7;
+                    string send_button_a11y = 11;
+                    string send_button_disabled_a11y = 12;
+                    string confirm_button_a11y = 13;
+                    string confirm_button_disabled_a11y = 14;
+                    string short_creation_button_a11y = 15;
+                    string timestamp_button_a11y = 16;
+                    string timestamp_button_disabled_a11y = 17;
+                    string emoji_picker_button_a11y = 18;
+                }
+
+                message CommentComposerTimestampEntityPayload {
+                    string key = 1;
+                    string latest_timestamp_text = 2;
+                }
+
+                message ProductCarouselInnerData {
+                    message ProductItem {
+                        message ThumbnailSource {
+                            string url = 1;
+                            int32 width = 4;
+                            int32 height = 5;
+                        }
+                        message VendorInfo {
+                            string context = 1;
+                            repeated StyleRun style_runs = 6 [packed = false];
+                        }
+                        string product_title = 1;
+                        string product_description = 2;
+                        string price = 3;
+                        string vendor_name = 4;
+                        bytes tracking_params = 7;
+                        InnertubeCommand on_tap_command = 9;
+                        string accessibility_label = 12;
+                        string additional_ffes_text = 16;
+                        bool stay_in_app = 19;
+                        string vendor_logo_url = 24;
+                        string cta_description_text = 25;
+                        repeated ThumbnailSource thumbnail_sources = 30 [packed = false];
+                        VendorInfo vendor_info = 31;
+                        uint64 offser_doc_id = 32;
+                        bytes featured_product_identifier = 46;
+                        bool enable_belly_bar_for_featured_product = 56;
+                        string encoded_offer_sku_id = 57;
+                        LoggingDirectives logging_directives = 999;
+                    }
+
+                    repeated ProductItem product_items = 3 [packed = false];
+                    bytes tracking_params = 4;
+                }
+
+                message VideoActionButtonEnablementEntity {
+                    string video_action_button_enablement_entity_key = 1;
+                    bool enabled = 2;
+                }
+
+                message TranscriptTrackSelectionEntity {
+                    string key = 1;
+                    int32 selected_track_index = 2;
+                    string serialized_params = 3;
+                }
+
+                message TranscriptSearchBoxStateEntity {
+                    string key = 1;
+                    bool is_hidden = 2;
+                }
+
+                message ButtonTouchFeedback {
+                    string key = 1;
+                    bool button_touch_feedback_enabled = 2;
+                }
+
+                oneof payload {
+                    CommentSharedEntityPayload comment_shared_entity_payload                                = 43;
+                    SubscriptionStateEntity subscription_state_entity                                       = 51;
+                    LikeStatusEntity like_status_entity                                                     = 62;
+                    SubscriptionNotificationSetting subscription_notification_setting                       = 82;
+                    SubscriptionNotificationStateEntity subscription_notification_state_entity              = 140;
+                    FilterChipBarEntity filter_chip_bar_entity                                              = 189;
+                    ButtonTouchFeedback button_touch_feedback                                               = 203;
+                    CommentComposerTextStateEntityPayload comment_composer_text_state_entity_payload        = 214;
+                    CommentComposerButtonStateEntityPayload comment_composer_button_state_entity_payload    = 215;
+                    CommentComposerTimestampEntityPayload comment_composer_timestamp_entity_payload         = 220;
+                    VideoActionButtonEnablementEntity video_action_button_enablement_entity                 = 289;
+                    TranscriptTrackSelectionEntity transcript_track_selection_entity                        = 315;
+                    CommentComposerControlsEntityPayload comment_composer_controls_entity_payload           = 327;
+                    TranscriptSearchBoxStateEntity transcript_search_box_state_entity                       = 341;
+                    ProductCarouselInnerData product_carousel_inner_data                                    = 378;
+                }
+            }
+
+            string entity_key = 1;
+            EntityMutationType type = 2;
+            Payload payload = 3;
+        }
+
+        repeated Mutation mutations = 1 [packed = false];
+        google.protobuf.Duration timestamp = 2;
+    }
+
+    message ElementUpdate {
+        message Update {
+            message TemplateUpdate {
+                string identifier = 1;
+                bytes serialized_template_config = 2;
+                uint64 resource_tag = 4;
+                repeated string dependencies = 5;
+            }
+
+            message JsModuleSetUpdate {
+                message JsModule {
+                    string identifier = 1;
+                    bytes serialized_module_config = 2;
+                    repeated string dependencies = 3 [packed = false];
+                }
+
+                repeated JsModule js_modules = 1 [packed = false];
+                bytes serialized_signer_cert = 2;
+                string cert_identifier = 3;
+            }
+
+            message ThemeUpdate {
+                string identifier = 1;
+                int64 resource_tag = 3;
+                bytes theme_bytes = 4;
+            }
+
+            message CapabilitiesUpdate {
+                string identifier = 1;
+                bytes capabilities_bytes = 2;
+                int64 resource_tag = 3;
+            }
+
+            message StaticDataResources {
+                message Identifier {
+                    string identifier = 1;
+                }
+
+                repeated Identifier resources = 1 [packed = false];
+            }
+
+            message ResourceStatusInResponseCheck {
+                message ResourceStatus {
+                    string identifier = 1;
+                    ElementResourceStatus status = 2;
+                }
+
+                repeated ResourceStatus resource_statuses = 1;
+                string server_build_label = 2;
+            }
+
+            TemplateUpdate template_update                                  = 196886555;
+            JsModuleSetUpdate js_module_set_update                          = 273577170;
+            ResourceStatusInResponseCheck resource_status_in_response_check = 328964737;
+            ThemeUpdate theme_update                                        = 421320458;
+            CapabilitiesUpdate capabilities_update                          = 423179876;
+            StaticDataResources static_data_resources                       = 426171393;
+        }
+
+        repeated Update updates = 1 [packed = false];
+    }
+
+    EntityBatchUpdate entity_batch_update = 1;
+    ElementUpdate element_update = 2;
+}
+
+message NextResponse {
+    ResponseContext response_context = 1;
+    NextContents contents = 7;
+    bytes tracking_params = 13;
+    Renderer player_overlays = 14;
+    InnertubeCommand current_video_endpoint = 9;
+    Renderer video_reporting = 16;
+    repeated Renderer engagement_panels = 25 [packed = false];
+    repeated Renderer page_visual_effects = 44 [packed = false];
+    FrameworkUpdates framework_updates = 777;
+}

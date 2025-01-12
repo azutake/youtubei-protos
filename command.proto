@@ -1,0 +1,496 @@
+syntax = "proto3";
+
+import "common.proto";
+import "theme.proto";
+import "context.proto";
+package pfinnertube;
+
+message TextRun {
+    string text = 1;
+    InnertubeCommand navigation_endpoint = 5;
+}
+
+message TextRuns {
+    repeated TextRun runs = 1 [packed = false];
+}
+
+message SetEntityCommand {
+    string identifier = 1;
+    bytes entity = 2;
+}
+
+message DismissComposerCommand {
+    bool hack = 1;
+}
+
+message YpcOffsetEndpoint {
+    string params = 1;
+}
+
+message SubscribeEndpoint {
+    repeated string channel_ids = 1 [packed = false];
+    string params = 3;
+}
+
+message SignInEndpoint {
+    InnertubeCommand next_endpoint = 2;
+}
+
+message CommandExecutorCommand {
+    repeated InnertubeCommand commands = 1;
+}
+
+message ShowEngagementPanelEndpoint {
+    string panel_identifier = 1;
+    bool force_portrait = 5;
+    EngagementPanelExtras engagement_panel_extras = 9;
+}
+
+message WatchEndpointSupportedOnesieConfig {
+    oneof config {
+        IosPlaybackOnesieConfig ios_playback_onesie_config = 146179543;
+    }
+}
+
+message IosPlaybackOnesieConfig {
+    CommonConfig common_config = 1;
+}
+
+message CommonConfig {
+    string url = 1;
+    bytes ustreamer_config = 4;
+}
+
+message WatchEndpoint {
+    message CoWatchabilityTypeMessage {
+        CoWatchabilityType type = 1;
+    }
+    string video_id = 1;
+    bytes ustreamer_config = 28;
+    CoWatchabilityTypeMessage cowatchability = 34;
+    WatchEndpointSupportedOnesieConfig watch_endpoint_supported_onesie_config = 79857908;
+}
+
+message FeedbackEndpoint {
+    string feedback_token = 1;
+}
+
+message UrlEndpoint {
+    string url = 1;
+}
+
+message ClickLoggingWrapperCommand {
+    bool log_as_ve_click = 1;
+    InnertubeCommand command = 2;
+}
+
+message OpenExternalUrlWithPictureInPictureCommand {
+    string url = 1;
+    GrwOpenInOverride grw_open_in_override = 3;
+    InnertubeCommand termination_command = 4;
+}
+
+message OptimisticUpdateCommand {
+
+}
+
+message SerialCommand {
+    repeated InnertubeCommand commands = 1 [packed = false];
+}
+
+message LogBackToAppEventCommand {
+    PageType page_type = 1;
+}
+
+message OnTap {
+    InnertubeCommand innertube_command                          = 169495254;
+    OptimisticUpdateCommand optimistic_update_command           = 170382629;
+}
+
+message InnertubeCommand {
+    bytes click_tracking_params = 2;
+    oneof command {
+        WatchEndpoint watch_endpoint                                                                    = 48687757;
+        UrlEndpoint url_endpoint                                                                        = 49679253;
+        SignInEndpoint sign_in_endpoint                                                                 = 49706687;
+        YpcOffsetEndpoint ypc_offset_endpoint                                                           = 64681250;
+        FeedbackEndpoint feedback_endpoint                                                              = 65153809;
+        SubscribeEndpoint subscribe_endpoint                                                            = 68997349;
+        ShowEngagementPanelEndpoint show_engagement_panel_endpoint                                      = 138681778;
+        InnertubeCommand innertube_command                                                              = 169495254;
+        SerialCommand serial_command                                                                    = 170382688;
+        SetEntityCommand set_entity_command                                                             = 170382720;
+        CommandExecutorCommand command_executor_command                                                 = 174116574;
+        InnertubeCommand elements_command                                                               = 204158123;
+        ClickLoggingWrapperCommand click_logging_wrapper_command                                        = 222848684;
+        LogBackToAppEventCommand log_back_to_app_event_command                                          = 300210387;
+        DismissComposerCommand dismiss_composer_command                                                 = 427304386;
+        OpenExternalUrlWithPictureInPictureCommand open_external_url_with_picture_in_picture_command    = 428788994;
+    }
+}
+
+message EngagementPanelExtras {
+    message SponsorshipsEngagementPanelExtras {
+        Renderer header = 1;
+        InnertubeCommand content_command = 2;
+    }
+
+    SponsorshipsEngagementPanelExtras sponsorships_engagement_panel_extras = 1;
+}
+
+message VideoMetadataViewModel {
+    message ExpandButtonData {
+        string a11y_label = 1;
+        bytes tracking_params = 3;
+    }
+
+    StringContent title = 1;
+    OnTap on_tap = 4;
+    bytes tracking_params = 6;
+    ExpandButtonData expand_button_data = 12;
+    ViewModel video_subtitle = 17;
+    repeated ViewModel video_badges = 20 [packed = false];
+    VideoMetadataStyle video_metadata_style = 22;
+}
+
+message VideoSubtitleViewModel {
+    message BadgesTextData {
+        string text = 1;
+        int32 text_length = 2;
+        repeated Run style_runs = 3 [packed = false];
+        repeated Run decoration_runs = 4 [packed = false];
+        repeated Run attachment_runs = 5 [packed = false];
+        string a11y_text = 7;
+    }
+
+    StringKey view_count_entity = 2;
+    StringContent view_count = 3;
+    StringContent date = 4;
+    int32 view_count_length = 5;
+    int32 date_length = 6;
+    StringContent truncation_text = 11;
+    int32 truncation_text_length = 12;
+    OnTap truncation_text_on_tap = 14;
+    string date_a11y_label = 15;
+    BadgesTextData badges_text_data = 16;
+    VideoSubtitleViewModelStyle style = 17;
+    DynamicMetadataAnimationType view_count_animation = 20;
+    StringKey upload_time_entity = 21;
+}
+
+message VideoBadgeViewModel {
+    string label = 1;
+    string icon_name = 2;
+    VideoBadgeViewModelStyle style = 6;
+    bytes tracking_params = 8;
+    string accessibility_label = 9;
+}
+
+message CompactChannelBarViewModel {
+    bytes tracking_params = 12;
+    float height = 22;
+    ViewModel sponsor_button = 23;
+    ViewModel subscribe_button = 24;
+}
+
+message TimedAnimationButtonViewModel {
+    message TimedAnimationData {
+        bytes tracking_params = 16;
+    }
+    ViewModel button_view_model = 1;
+    TimedAnimationData timed_animation_data = 2;
+}
+
+message SubscriptionStateEntity {
+    string key = 1;
+    bool subscribed = 2;
+}
+
+message SubscribeButtonViewModel {
+    message ButtonContent {
+        string button_text = 1;
+        string accessibility_text = 2;
+        string image_name = 3;
+        SubscriptionStateEntity subscribe_state = 4;
+        OnTap on_tap_command = 5;
+    }
+
+    ButtonContent subscribe_button_content = 1;
+    ButtonContent unsubscribe_button_content = 2;
+}
+
+message NotificationBellViewModel {
+
+}
+
+message ChannelBarHeaderViewModel {
+
+}
+
+message ButtonViewModel {
+    string title = 3;
+    OnTap on_tap = 4;
+    string accessibilityText = 5;
+    ButtonViewModelStyle style = 7;
+    bytes tracking_params = 8;
+    ButtonViewModelType type = 11;
+    ButtonViewModelSize button_size = 13;
+    ButtonViewModelState state = 14;
+    string target_id = 30;
+}
+
+message ViewModel {
+    oneof viewModel {
+        VideoSubtitleViewModel video_subtitle_view_model                = 1017;
+        VideoMetadataViewModel video_metadata_view_model                = 1019;
+        CompactChannelBarViewModel compact_channel_bar_view_model       = 1107;
+        TimedAnimationButtonViewModel timed_animation_button_view_model = 302542834;
+        ButtonViewModel button_view_model                               = 461054335;
+        VideoBadgeViewModel video_badge_view_model                      = 504944834;
+        SubscribeButtonViewModel subscribe_button_view_model            = 518912898;
+    }
+}
+
+message ApplyFilterCommand {
+
+}
+
+message IdentifierAndResultPath {
+    string identifier = 1;
+    repeated int32 result_path = 2 [packed = false];
+}
+
+message MappingsAndResultField {
+    repeated IdentifierAndResultPath mappings = 1 [packed = false];
+    int32 result_field = 2;
+}
+
+message ComponentType {
+    message TemplateConfig {
+        UriTemplateConfig uri_template_config       = 172035250;
+    }
+    TemplateConfig template_config = 3;
+
+    message SubscriptionConfig {
+        message EnvironmentSubscriptionConfig {
+            int32 result_field = 1;
+            int32 environment_data_field = 2;
+        }
+
+        EnvironmentSubscriptionConfig environment_subscription_config   = 212323971;
+        MappingsAndResultField theme_subscription_config                = 386334485;
+        MappingsAndResultField capabilities_subscription_config         = 386334486;
+    }
+
+    Model model = 5;
+    SubscriptionConfig subscription_config = 6;
+}
+
+message CellType {
+
+}
+
+message IdentifierProperties {
+    string identifier = 1;
+    string unique_logging_identifier = 6;
+}
+
+message Element {
+    message Type {
+        CellType cell_type                          = 160982084;
+        ComponentType component_type                = 168777401;
+    }
+
+    message Properties {
+        IdentifierProperties identifier_properties  = 183314536;
+    }
+    Type type = 1;
+    Properties properties = 2;
+    repeated Element child_element = 3 [packed = false];
+}
+
+message ElementRenderer {
+    bytes tracking_params = 5;
+    Element new_element                             = 172660663;
+}
+
+message ContentElementRenderer {
+    ElementRenderer element_renderer                = 153515154;
+}
+
+message CompanionAdRenderer {
+    bool hack = 1;
+    bytes tracking_params = 9;
+}
+
+message EngagementPanelSectionListRenderer {
+    string panel_identifier = 1;
+    Renderer header = 2;
+    Renderer content = 3;
+    int32 ve_type = 5;
+    bool disable_pull_refresh = 6;
+    EngagementPanelResizability resizability = 13;
+    EngagementPanelAutoplay engagement_planel_autoplay = 17;
+    bool allow_replace = 20;
+    LoggingDirectives logging_directives = 999;
+}
+
+message EngagementPanelTitleHeaderRenderer {
+    TextRuns title = 1;
+    bytes tracking_params = 12;
+    Renderer subheader = 19;
+}
+
+message ContentElementRendererMultiple {
+    repeated ContentElementRenderer contents = 1;
+}
+
+message ContentElementRendererSingle {
+    ContentElementRenderer content = 1;
+}
+
+message PlayerOverlayRenderer {
+    Renderer overflow_menu = 2;
+}
+
+message MenuRenderer {
+    repeated ContentElementRenderer items = 1 [packed = false];
+    bytes tracking_params = 4;
+}
+
+message ReportFormModalRenderer {
+    Renderer options_supported_renderers = 1;
+    bytes tracking_params = 3;
+    TextRuns title = 4;
+    Renderer submit_button = 5;
+    Renderer cancel_button = 6;
+    repeated TextRuns footer = 8;
+    Renderer next_button = 9;
+}
+
+message ButtonRenderer {
+    enum Style {
+        STYLE_UNKNOWN = 0;
+        STYLE_TEXT = 7;
+        STYLE_BLUE_TEXT = 13;
+        STYLE_BRAND = 14;
+    }
+
+    enum Size {
+        SIZE_UNKNOWN = 0;
+        SIZE_DEFAULT = 1;
+    }
+
+    Style style = 1;
+    Size size = 2;
+    bool is_disabled = 3;
+    TextRuns text = 5;
+    bytes tracking_params = 13;
+}
+
+message OptionsRenderer {
+
+}
+
+message SectionListRenderer {
+    repeated Renderer contents = 1 [packed = false];
+}
+
+message ItemSectionRenderer {
+    message SeparatorDetails {
+    }
+    repeated ContentElementRenderer contents = 1 [packed = false];
+    bytes tracking_params = 4;
+    SeparatorDetails separator_details = 8;
+}
+
+message CinematicContainerRenderer {
+    message GradientColorConfig {
+        uint32 dark_theme_color = 2;
+        float start_location = 3;
+    }
+
+    message Config {
+        message AnimationConfig {
+            uint32 minImageUpdateIntervalMs = 1;
+            uint32 crossfadeDurationMs = 2;
+            float crossfadeStartOffset = 3;
+            uint32 maxFrameRate = 4;
+        }
+        
+        message WatchFullscreenConfig {
+            float colorSourceWidthMultiplier = 1;
+            float colorSourceHeightMultiplier = 2;
+            float scrimWidthMultiplier = 3;
+            float scrimHeightMultiplier = 4;
+            uint32 flatScrimColor = 5;
+        }
+        uint32 lightThemeBackgroundColor = 1;
+        uint32 darkThemeBackgroundColor = 2;
+        AnimationConfig animation_config = 3;
+        float colorSourceSizeMultiplier = 4;
+        bool applyClientImageBlur = 5;
+        float bottomColorSourceHeightMultiplier = 6;
+        float maxBottomColorSourceHeight = 7;
+        float colorSourceWidthMultiplier = 8;
+        float colorSourceHeightMultiplier = 9;
+        float blurStrength = 10;
+        bool settingOnByDefault = 11;
+        WatchFullscreenConfig watch_fullscreen_config = 13;
+    }
+
+    repeated GradientColorConfig gradient_color_config = 2 [packed = false];
+    CinematicContainerPresentationStyle presentation_style = 3;
+    Config config = 4;
+}
+
+message Renderer {
+    oneof renderers {
+        SectionListRenderer section_list_renderer                                   = 49399797;
+        ItemSectionRenderer item_section_renderer                                   = 50195462;
+        CompanionAdRenderer companion_ad_renderer                                   = 55514441;
+        ButtonRenderer button_renderer                                              = 65153809;
+        MenuRenderer menu_renderer                                                  = 66439850;
+        OptionsRenderer options_renderer                                            = 77875886;
+        PlayerOverlayRenderer player_overlay_renderer                               = 78882851;
+        ReportFormModalRenderer report_form_modal_renderer                          = 113762946;
+        EngagementPanelSectionListRenderer engagement_panel_section_list_renderer   = 138681066;
+        EngagementPanelTitleHeaderRenderer engagement_panel_title_header_renderer   = 138681548;
+        ContentElementRendererMultiple slim_video_metadata_section_renderer         = 216561405;
+        ContentElementRendererSingle filter_chip_bar_element_renderer               = 420115721;
+        CinematicContainerRenderer cinematic_container_renderer                     = 455752576;
+    }
+}
+
+message Model {
+    message FilterChipBarModel {
+        Theme theme = 1;
+        string static_key = 2;
+        ApplyFilterCommand apply_filter_command = 4;
+    }
+
+    message VideoMetadataModel {
+        ModelContext context = 4;
+        ViewModel view_model = 6;
+        bool use_theme_from_context = 16;
+    }
+
+    message CompactChannelBarModel {
+        ModelContext context = 2;
+        StringKey subscribe_state = 3;
+        ViewModel compact_channel_bar_view_model = 9;
+    }
+
+    message OverflowMenuItemModel {
+    }
+
+    message GamingSectionModel {
+
+    }
+
+    FilterChipBarModel filter_chip_bar_model            = 303917328;
+    GamingSectionModel gaming_section_model             = 349453988;
+    VideoMetadataModel video_metadata_model             = 377581260;
+    CompactChannelBarModel compact_channel_bar_model    = 391108665;
+    OverflowMenuItemModel overflow_menu_item_model      = 407694004;
+}

@@ -1,0 +1,132 @@
+syntax = "proto3";
+
+import "common.proto";
+package pfinnertube;
+
+message ModelContext {
+    message MainAppContext {
+        message Experiments {
+            BannerTextIcon bannerTextIconDarkThemeBackgroundColor = 12;
+            float collectionThumbnailTransitionDurationSec = 92;
+            float collectionTextTransitionDurationSec = 93;
+            float collectionLoopDelayDurationSec = 94;
+            int32 emlPerfTest = 108;
+            float enableResponsiveAvatarRowBreakpoint = 114;
+            
+        }
+        Experiments experiments = 1;
+        ClientName client_name = 2;
+    }
+    message StaticDeviceEnvDataContext {
+        ClientName client_name = 1;
+        ClientInfo.PlatformName platform_name = 2;
+    }
+
+    message TypographyContext {
+
+    }
+    
+    message ReelsPlayerContext {
+        message Experiments {
+            bool enable_reels_elements_action_bar_click_logging_fixes = 1;
+            bool enable_reels_elements_action_bar_darker_shadows = 2;
+            bool enable_channel_name_tap_area_fix = 4;
+        }
+        Experiments experiments = 1;
+    }
+
+    message ShoppingAppContext {
+        message Experiments {
+            bool enable_product_thumbnails_overlay3pct = 1;
+            bool enable_unified_featured_product_banners = 8;
+            bool enable_out_of_stock_text = 10;
+            bool enable_out_of_stock_text_all_surfaces = 11;
+            float delay_seconds_on_cfp_rendering = 14;
+            float banner_max_width_in_portrait_with_visible_controls = 16;
+            float banner_max_width_in_landscape_with_visible_controls = 17;
+            bool enable_metadata_rearrangement_for_featured_product_banner = 22;
+        }
+
+        Experiments experiments = 1;
+    }
+
+    message MusicChannelsContext {
+        message ExperimentFlags {
+            bool enableChannelPageModernProfileSection = 1;
+            bool enableChannelAvatarModal = 2;
+            bool enableViewPronounsOnMainApp = 7;
+            bool enableHandleValidationWhileTypingOnCreateChannel = 15;
+            bool enableAlcMobileChannelPageDescriptionAndLinks = 19;
+        }
+
+        ExperimentFlags experiment_flags = 1;
+    }
+
+    message AdsContext {
+        message ExperimentFlags {
+            float metadataTransitionEaseOutSecsSko = 8;
+            bool enableRhsPanelOnElements = 9;
+            bool enableCarouselPageClickableCard = 29;
+            bool enableTempAnimeCrashFix = 33;
+            bool exptFullBleedCarouselLastCardScrollFix = 35;
+            int32 showCarouselOnDwellForVacTravelInfeedDwellDurationMs = 36;
+            bool useUpdatedIconsForAdsManagedIconsElements = 40;
+            bool skoverlaySubscribeToNewKey = 45;
+            bool enableAdsLandscapeEngagementPanelOnIosServer = 47;
+            bool enableFlattenRhsPanelOnElementsForShortsAds = 60;
+            float transitionDurationAdSwappingInSec = 61;
+            bool useCellForStoreVisitPanel = 69;
+            float delayedCarouselExtensionScale = 73;
+            bool fixPauseAdsLayout = 74;
+            bool enableClickableCardPauseAds = 75;
+            bool enableColorExtractedCardPauseAds = 77;
+            float shortsAdLeaveBehindSecondsToInvisible = 82;
+            bool enableTopLayoutLevelLoggingDirectives = 83;
+            float shortsNavigationFadeInDelaySeconds = 92;
+            float shortsNavigationAnimationDurationSeconds = 93;
+            float shortsAdLeaveBehindSecondsToAutoDismiss = 95;
+            bool enableSmallerClickAreaShortsImageAdTooltip = 100;
+            bool enableReelsPlayerTopScrim = 101;
+            int32 websiteAutoClickCountdownSeconds = 106;
+        }
+
+        ExperimentFlags experiment_flags = 1;
+    }
+
+    message MusicContext {
+        message Experiments {
+            bool enableRadioBuilderCarousel = 2;
+            bool enableLargeRecapHeaderBackgroundImage = 4;
+            bool enablePhotosRecapShuffleUi = 19;
+            bool enableA11yButtonTraitOnPlaylistsInMusicPlaylistsPickerModel = 20;
+            bool enableFullWidthForSingleMusicListItemInCarousel = 25;
+            bool enableElcInDownloadButtonComponent = 30;
+            float simplifiedShelfSpaceS1 = 31;
+            float simplifiedShelfSpaceS2 = 32;
+            float simplifiedShelfSpaceS3 = 33;
+            float simplifiedShelfSpaceM1 = 34;
+            float simplifiedShelfSpaceM2 = 35;
+            float simplifiedShelfSpaceL1 = 36;
+            float simplifiedShelfSpaceL2 = 37;
+            float simplifiedShelfFirstItemTopMarginS1 = 39;
+            float simplifiedShelfFirstItemTopMarginS2 = 40;
+            float simplifiedShelfFirstItemTopMarginS3 = 41;
+            float simplifiedShelfFirstItemTopMarginM1 = 42;
+            float simplifiedShelfFirstItemTopMarginM2 = 43;
+            float simplifiedShelfFirstItemTopMarginL1 = 44;
+            float simplifiedShelfFirstItemTopMarginL2 = 45;
+        }
+
+        Experiments experiments = 2;
+    }
+
+    StaticDeviceEnvDataContext static_device_env_data_context = 1007;
+    TypographyContext typography_context        = 1010;
+    MainAppContext main_app_context             = 351816584;
+    ReelsPlayerContext reels_player_context     = 351816585;
+    string theme_key                            = 470784583;
+    ShoppingAppContext shopping_app_context     = 472707990;
+    AdsContext ads_context                      = 473367284;
+    MusicChannelsContext music_channel_context  = 480037882;
+    MusicContext music_context                  = 480134201;
+}
