@@ -51,11 +51,6 @@ message FrameworkUpdates {
                     SubscriptionNotificationSettingState state = 2;
                 }
 
-                message LikeStatusEntity {
-                    string key = 1;
-                    LikeStatus like_status = 2;
-                }
-
                 message SubscriptionNotificationStateEntity {
                     string key = 1;
                     SubscriptionNotificationState state = 2;
@@ -131,36 +126,6 @@ message FrameworkUpdates {
                 }
 
                 message ProductCarouselInnerData {
-                    message ProductItem {
-                        message ThumbnailSource {
-                            string url = 1;
-                            int32 width = 4;
-                            int32 height = 5;
-                        }
-                        message VendorInfo {
-                            string context = 1;
-                            repeated StyleRun style_runs = 6 [packed = false];
-                        }
-                        string product_title = 1;
-                        string product_description = 2;
-                        string price = 3;
-                        string vendor_name = 4;
-                        bytes tracking_params = 7;
-                        InnertubeCommand on_tap_command = 9;
-                        string accessibility_label = 12;
-                        string additional_ffes_text = 16;
-                        bool stay_in_app = 19;
-                        string vendor_logo_url = 24;
-                        string cta_description_text = 25;
-                        repeated ThumbnailSource thumbnail_sources = 30 [packed = false];
-                        VendorInfo vendor_info = 31;
-                        uint64 offser_doc_id = 32;
-                        bytes featured_product_identifier = 46;
-                        bool enable_belly_bar_for_featured_product = 56;
-                        string encoded_offer_sku_id = 57;
-                        LoggingDirectives logging_directives = 999;
-                    }
-
                     repeated ProductItem product_items = 3 [packed = false];
                     bytes tracking_params = 4;
                 }

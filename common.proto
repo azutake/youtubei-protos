@@ -195,6 +195,35 @@ enum PageType {
     PAGE_TYPE_WATCH_NEXT = 3;
 }
 
+enum EkoFieldType {
+    EKO_FIELD_TYPE_UNKNOWN = 0;
+    EKO_FIELD_TYPE_INT32 = 5;
+    EKO_FIELD_TYPE_BOOL = 8;
+}
+
+enum EkoVariableType {
+    EKO_VARIABLE_TYPE_UNKNOWN = 0;
+    EKO_VARIABLE_TYPE_INPUT = 1;
+    EKO_VARIABLE_TYPE_OUTPUT = 2;
+    EKO_VARIABLE_TYPE_SCOPED = 3;
+    EKO_VARIABLE_TYPE_GLOBAL = 4;
+}
+
+enum ViewCountFactoidType {
+    VIEW_COUNT_FACTOID_TYPE_UNKNOWN = 0;
+    VIEW_COUNT_FACTOID_TYPE_TOTAL_VIEWS = 2;
+}
+
+enum AvatarSize {
+    AVATAR_SIZE_UNKNOWN = 0;
+    AVATAR_SIZE_XS = 1;
+}
+
+enum DimensionUnit {
+    DIMENSION_UNIT_UNKNOWN = 0;
+    DIMENSION_UNIT_POINT = 1;
+}
+
 message Run {
     int32 start_index = 1;
     int32 length = 2;
@@ -204,10 +233,13 @@ message Run {
 }
 
 message StyleRun {
-    int32 start_index = 1;
-    int32 length = 2;
+    uint32 start_index = 1;
+    uint32 length = 2;
     string font_name = 3;
+    uint32 font_color = 5;
+    FontWeight font_weight = 8;
     StyleRunExtensions style_run_extensions = 10;
+    string font_family_name = 14;
 }
 
 message StyleRunExtensions {
@@ -222,14 +254,19 @@ message UriTemplateConfig {
     string uri = 1;
 }
 
-message AttributedString {
-    string content = 1;
-}
-
 message LoggingDirectives {
     message StringTypes {
         int32 types = 1;
     }
     bytes tracking_params = 1;
     StringTypes visibility = 4;
+}
+
+message LikeStatusEntity {
+    string key = 1;
+    LikeStatus like_status = 2;
+}
+
+message AnimatedValueData {
+    DynamicMetadataAnimationType animation_type = 1;
 }
