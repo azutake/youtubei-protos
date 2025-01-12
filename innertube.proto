@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package pfinnertube;
+
+import "google/api/annotations.proto";
+import "api/watch_next.proto";
+
+service Innertube {
+  option (google.api.default_host) = "https://youtubei.googleapis.com";
+
+  rpc GetWatchNext(WatchNextRequest) returns (WatchNextResponse) {
+    option (google.api.http) = {
+      post: "/next",
+      body: "*"
+    };
+  }
+}
