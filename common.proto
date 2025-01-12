@@ -152,16 +152,19 @@ enum BannerTextIcon {
 
 enum ButtonViewModelStyle {
     BUTTON_VIEW_MODEL_STYLE_UNKNOWN = 0;
+    BUTTON_VIEW_MODEL_STYLE_CUSTOM = 7;
     BUTTON_VIEW_MODEL_STYLE_MONO = 9;
 }
 
 enum ButtonViewModelType {
     BUTTON_VIEW_MODEL_TYPE_UNKNOWN = 0;
     BUTTON_VIEW_MODEL_TYPE_FILLED = 1;
+    BUTTON_VIEW_MODEL_TYPE_OUTLINE = 2;
 }
 
 enum ButtonViewModelSize {
     BUTTON_VIEW_MODEL_SIZE_UNKNOWN = 0;
+    BUTTON_VIEW_MODEL_SIZE_DEFAULT = 1;
     BUTTON_VIEW_MODEL_SIZE_COMPACT = 2;
 }
 
@@ -222,6 +225,39 @@ enum AvatarSize {
 enum DimensionUnit {
     DIMENSION_UNIT_UNKNOWN = 0;
     DIMENSION_UNIT_POINT = 1;
+}
+
+enum ExpandableListCornerStyle {
+    EXPANDABLE_LIST_CORNER_STYLE_UNKNOWN = 0;
+    EXPANDABLE_LIST_CORNER_STYLE_NONE = 1;
+}
+
+enum DividerStyle {
+    DIVIDER_STYLE_UNKNOWN = 0;
+    DIVIDER_STYLE_FULL_BLEED_THICK = 3;
+}
+
+enum ButtonStyle {
+    BUTTON_STYLE_UNKNOWN = 0;
+    BUTTON_STYLE_CTA = 1;
+}
+
+enum ButtonType {
+    BUTTON_TYPE_UNKNOWN = 0;
+    BUTTON_TYPE_FILLED = 1;
+    BUTTON_TYPE_OUTLINE = 2;
+    BUTTON_TYPE_TEXT = 3;
+}
+
+enum ButtonState {
+    BUTTON_STATE_UNKNOWN = 0;
+    BUTTON_STATE_ACTIVE = 1;
+    BUTTON_STATE_INACTIVE = 2;
+}
+
+enum RecognitionShelfSurface {
+    RECOGNITION_SHELF_SURFACE_UNKNOWN = 0;
+    RECOGNITION_SHELF_SURFACE_VIDEO_DESCRIPTION = 2;
 }
 
 message Run {

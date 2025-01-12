@@ -174,6 +174,10 @@ message ShowDialogCommand {
     PanelLoadingStrategy panel_loading_strategy = 1;
 }
 
+message ShowActionSheetCommand {
+    Element footer = 2;
+}
+
 message OnTap {
     InnertubeCommand innertube_command                          = 169495254;
     OptimisticUpdateCommand optimistic_update_command           = 170382629;
@@ -200,6 +204,7 @@ message InnertubeCommand {
         InnertubeCommand elements_command                                                               = 204158123;
         DynamicEntitiesCommand dynamic_entities_command                                                 = 206181248;
         ClickLoggingWrapperCommand click_logging_wrapper_command                                        = 222848684;
+        ShowActionSheetCommand show_action_sheet_command                                                = 278463287;
         LogBackToAppEventCommand log_back_to_app_event_command                                          = 300210387;
         DismissComposerCommand dismiss_composer_command                                                 = 427304386;
         OpenExternalUrlWithPictureInPictureCommand open_external_url_with_picture_in_picture_command    = 428788994;
@@ -318,6 +323,7 @@ message ButtonViewModel {
     ButtonViewModelSize button_size = 13;
     ButtonViewModelState state = 14;
     string target_id = 30;
+    ProductItem.ThumbnailSource icon_image = 35;
 }
 
 message PanelFooterViewModel {
@@ -469,6 +475,7 @@ message EngagementPanelSectionListRenderer {
 
 message EngagementPanelTitleHeaderRenderer {
     TextRuns title = 1;
+    Renderer action_button = 6;
     bytes tracking_params = 12;
     Renderer subheader = 19;
 }
@@ -514,11 +521,26 @@ message ButtonRenderer {
         SIZE_DEFAULT = 1;
     }
 
+    message ElementsButton {
+        string title = 3;
+        InnertubeCommand on_tap = 4;
+        string accessibility_text = 5;
+        ButtonStyle button_style = 7;
+        bytes tracking_params = 8;
+        ButtonType type = 11;
+        ButtonState state = 14;
+        string target_id = 30;
+    }
+
     Style style = 1;
     Size size = 2;
     bool is_disabled = 3;
     TextRuns text = 5;
+    Icon icon = 8;
+    AccessibilityData accessibility = 10;
     bytes tracking_params = 13;
+    InnertubeCommand command = 19;
+    ElementsButton elements_button = 24;
 }
 
 message OptionsRenderer {
@@ -534,7 +556,7 @@ message Continuations {
     ReloadContinuationData reload_continuation_data = 60487319;
 }
 
-message FactoidLabel {
+message RendererLabel {
     AttributedString elements_attributed_string = 5;
 }
 
@@ -551,6 +573,7 @@ message SeparatorDetails {
 message ItemSectionRenderer {
     repeated ContentElementRenderer contents = 1 [packed = false];
     bytes tracking_params = 4;
+    bool hide_bottom_separator = 8;
     SeparatorDetails separator_details = 10;
 }
 
@@ -609,8 +632,8 @@ message ViewCountFactoidRenderer {
 }
 
 message FactoidRenderer {
-    FactoidLabel value = 1;
-    FactoidLabel label = 2;
+    RendererLabel value = 1;
+    RendererLabel label = 2;
     string accessibility_text = 3;
     AnimatedValueData animated_value_data = 5;
 }
@@ -633,6 +656,7 @@ message Icon {
         UNKNOWN = 0;
         FLAG = 52;
         HELP = 80;
+        MORE_VERT = 254;
     }
 
     IconType icon_type = 1;
@@ -653,26 +677,79 @@ message MenuServiceItemRenderer {
     LoggingDirectives logging_directives = 999;
 }
 
+message ThumbnailDetails {
+    message ElementsImage {
+        repeated ProductItem.ThumbnailSource sources = 1 [packed = false];
+    }
+
+    ElementsImage elements_image = 10;
+}
+
+message MediaLockupRenderer {
+    RendererLabel title = 1;
+    RendererLabel subtitle = 2;
+    ThumbnailDetails thumbnail_details = 3;
+    InnertubeCommand endpoint = 4;
+    bytes tracking_params = 6;
+}
+
+message TopicLinkRenderer {
+    RendererLabel title = 1;
+    ThumbnailDetails thumbnail_details = 2;
+    InnertubeCommand endpoint = 3;
+    bytes tracking_params = 6;
+}
+
+message CompactInfocardRenderer {
+    Renderer content = 1;
+    RendererLabel creator_message = 2;
+    bytes tracking_params = 5;
+}
+
+message StructuredDescriptionChannelLockupRenderer {
+    ThumbnailDetails thumbnail = 1;
+    RendererLabel title = 2;
+    RendererLabel subscriber_count_text = 3;
+    InnertubeCommand navigation_endpoint = 4;
+    bytes tracking_params = 6;
+    bool disable_navigation_endpoint = 7;
+    float thumbnail_width = 8;
+    int32 max_lines_title = 9;
+    int32 max_lines_subscriber_count_text = 10;
+}
+
+message RecognitionShelfRenderer {
+    RendererLabel title = 1;
+    repeated ThumbnailDetails avatars = 3 [packed = false];
+    Renderer button = 4;
+    RecognitionShelfSurface surface = 5;
+}
+
 message Renderer {
     oneof renderers {
-        SectionListRenderer section_list_renderer                                   = 49399797;
-        ItemSectionRenderer item_section_renderer                                   = 50195462;
-        CompanionAdRenderer companion_ad_renderer                                   = 55514441;
-        ButtonRenderer button_renderer                                              = 65153809;
-        MenuRenderer menu_renderer                                                  = 66439850;
-        MenuNavigationItemRenderer menu_navigation_item_renderer                    = 66441108;
-        MenuServiceItemRenderer menu_service_item_renderer                          = 66441155;
-        OptionsRenderer options_renderer                                            = 77875886;
-        PlayerOverlayRenderer player_overlay_renderer                               = 78882851;
-        ReportFormModalRenderer report_form_modal_renderer                          = 113762946;
-        EngagementPanelSectionListRenderer engagement_panel_section_list_renderer   = 138681066;
-        EngagementPanelTitleHeaderRenderer engagement_panel_title_header_renderer   = 138681548;
-        ContentElementRendererMultiple slim_video_metadata_section_renderer         = 216561405;
-        FactoidRenderer factoid_renderer                                            = 324315956;
-        SentimentFactoidRenderer sentiment_factoid_renderer                         = 327708604;
-        ViewCountFactoidRenderer view_count_factoid_renderer                        = 357814204;
-        ContentElementRendererSingle filter_chip_bar_element_renderer               = 420115721;
-        CinematicContainerRenderer cinematic_container_renderer                     = 455752576;
+        SectionListRenderer section_list_renderer                                                   = 49399797;
+        ItemSectionRenderer item_section_renderer                                                   = 50195462;
+        CompanionAdRenderer companion_ad_renderer                                                   = 55514441;
+        ButtonRenderer button_renderer                                                              = 65153809;
+        MenuRenderer menu_renderer                                                                  = 66439850;
+        MenuNavigationItemRenderer menu_navigation_item_renderer                                    = 66441108;
+        MenuServiceItemRenderer menu_service_item_renderer                                          = 66441155;
+        OptionsRenderer options_renderer                                                            = 77875886;
+        PlayerOverlayRenderer player_overlay_renderer                                               = 78882851;
+        ReportFormModalRenderer report_form_modal_renderer                                          = 113762946;
+        EngagementPanelSectionListRenderer engagement_panel_section_list_renderer                   = 138681066;
+        EngagementPanelTitleHeaderRenderer engagement_panel_title_header_renderer                   = 138681548;
+        ContentElementRendererMultiple slim_video_metadata_section_renderer                         = 216561405;
+        FactoidRenderer factoid_renderer                                                            = 324315956;
+        SentimentFactoidRenderer sentiment_factoid_renderer                                         = 327708604;
+        TopicLinkRenderer topic_link_renderer                                                       = 346199844;
+        MediaLockupRenderer media_lockup_renderer                                                   = 352674673;
+        ViewCountFactoidRenderer view_count_factoid_renderer                                        = 357814204;
+        CompactInfocardRenderer compact_infocard_renderer                                           = 370471196;
+        StructuredDescriptionChannelLockupRenderer structured_description_channel_lockup_renderer   = 375527320;
+        ContentElementRendererSingle filter_chip_bar_element_renderer                               = 420115721;
+        RecognitionShelfRenderer recognition_shelf_renderer                                         = 432471502;
+        CinematicContainerRenderer cinematic_container_renderer                                     = 455752576;
     }
 }
 
@@ -771,6 +848,8 @@ message ShoppingLinkItem {
     string price_or_status = 4;
     repeated ProductItem.ThumbnailSource thumbnail_sources = 6 [packed = false];
     InnertubeCommand on_tap_command = 7;
+    string accessibility_label = 8;
+    LoggingDirectives logging_directives = 999;
 }
 
 message Model {
@@ -796,7 +875,14 @@ message Model {
     }
 
     message GamingSectionModel {
+        message ModelRenderer {
+            RendererLabel section_title = 1;
+            repeated Renderer media_lockups = 2 [packed = false];
+            Renderer topic_link = 3;
+        }
 
+        ModelRenderer renderer = 1;
+        ModelContext context = 3;
     }
 
     message ProductEngagementPanelModel {
@@ -862,14 +948,25 @@ message Model {
 
     message ExpandableListModel {
         message ExpandableListData {
+            message ButtonContent {
+                string text = 1;
+                InnertubeCommand command = 2;
+                bool always_show_button = 3;
+                LoggingDirectives logging_directives = 999;
+            }
             AttributedString title = 1;
             uint32 default_visible_items_count = 3;
             bool is_all_affiliate_products = 5;
             AttributedString subtitle = 7;
-            ShoppingLinkItem shopping_link_items = 10;
+            repeated ShoppingLinkItem shopping_link_items = 10 [packed = false];
+            ButtonContent bottom_button = 11;
+            ExpandableListCornerStyle corner_style = 12;
+            LoggingDirectives logging_directives = 999;
         }
         ModelContext context = 2;
         ExpandableListData expandable_list_data = 3;
+        string expanded_state_key = 6;
+        bool match_background_to_description = 9;
     }
 
     message YoutubeModel {
@@ -877,15 +974,65 @@ message Model {
         ModelContext context = 3;
     }
 
+    message CellDividerModel {
+        DividerStyle divider_style = 1;
+        float bottom_padding = 5;
+        ModelContext context = 6;
+    }
+
+    message TranscriptSectionModel {
+        message ModelRenderer {
+            RendererLabel section_title = 1;
+            RendererLabel sub_header_text = 2;
+            Renderer primary_button = 4;
+            bytes tracking_params = 6;
+        }
+
+        ModelRenderer renderer = 2;
+        ModelContext context = 4;
+    }
+
+    message InfocardsSectionModel {
+        message ModelRenderer {
+            Renderer creator_videos_button = 3;
+            Renderer creator_about_button = 4;
+            repeated Renderer infocards = 5 [packed = false];
+            string infocard_highlight_status_key = 6;
+            repeated ViewModel creator_custom_url_buttons = 10 [packed = false];
+            bytes tracking_params = 12;
+            ViewModel compact_channel_bar_view_model = 13;
+        }
+
+        ModelRenderer renderer = 1;
+        ModelContext context = 2;
+    }
+
+    message BottomSheetFooterModel {
+        message FooterContent {
+            message IconContent {
+                string icon_name = 1;
+            }
+            string dismiss_text = 1;
+            IconContent icon_content = 2;
+        }
+
+        FooterContent footer_content = 1;
+        ModelContext context = 4;
+    }
+
     oneof models {
         ProductItemModel product_item_model                         = 212837938;
         ProductEngagementPanelModel product_engagement_panel_model  = 215356354;
+        BottomSheetFooterModel bottom_sheet_footer_model            = 275876139;
         VideoDescriptionHeaderModel video_description_header_model  = 290800601;
         FilterChipBarModel filter_chip_bar_model                    = 303917328;
         CellDescriptionBodyModel description_body_model             = 332574303;
+        CellDividerModel cell_divider_model                         = 347043917;
         GamingSectionModel gaming_section_model                     = 349453988;
+        InfocardsSectionModel infocards_section_model               = 371385544;
         VideoMetadataModel video_metadata_model                     = 377581260;
         CompactChannelBarModel compact_channel_bar_model            = 391108665;
+        TranscriptSectionModel transcript_section_model             = 397126334;
         OverflowMenuItemModel overflow_menu_item_model              = 407694004;
         YoutubeModel youtube_model                                  = 413471385;
         ExpandableListModel expandable_list_model                   = 520039324;
