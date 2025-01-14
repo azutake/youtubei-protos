@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+import "common.proto";
+import "command.proto";
+import "api/innertube_context.proto";
+package pfinnertube;
+
+message GetWatchRequest {
+    InnerTubeContext context = 1;
+    string browseId = 2;
+}
+
+message GetWatchResponse {
+  
+}
+
+// https://youtubei.googleapis.com/youtubei/v1/get_watch?id=W4bMYwTSYPA

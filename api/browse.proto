@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+import "common.proto";
+import "command.proto";
+import "api/innertube_context.proto";
+package pfinnertube;
+
+message BrowseRequest {
+    InnerTubeContext context = 1;
+    string browseId = 2;
+}
+
+message BrowseResponse {
+  
+}

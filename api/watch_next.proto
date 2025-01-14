@@ -3,10 +3,11 @@ syntax = "proto3";
 import "google/protobuf/duration.proto";
 import "common.proto";
 import "command.proto";
+import "api/innertube_context.proto";
 package pfinnertube;
 
 message WatchNextRequest {
-    Context context = 1;
+    InnerTubeContext context = 1;
     string video_id = 2;
 }
 
