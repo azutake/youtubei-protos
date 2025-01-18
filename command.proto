@@ -94,7 +94,7 @@ message MenuEndpoint {
     Renderer menu = 1;
 }
 
-message GetReportFormEndpoint {
+message ParamsEndpoint {
     string params = 1;
 }
 
@@ -195,7 +195,8 @@ message InnertubeCommand {
         FeedbackEndpoint feedback_endpoint                                                              = 65153809;
         SubscribeEndpoint subscribe_endpoint                                                            = 68997349;
         MenuEndpoint menu_endpoint                                                                      = 98150882;
-        GetReportFormEndpoint get_report_form_endpoint                                                  = 113762617;
+        ParamsEndpoint get_report_form_endpoint                                                         = 113762617;
+        ParamsEndpoint ypc_get_offline_upsell_endpoint                                                  = 133724106;
         ShowEngagementPanelEndpoint show_engagement_panel_endpoint                                      = 138681778;
         InnertubeCommand innertube_command                                                              = 169495254;
         SerialCommand serial_command                                                                    = 170382688;
@@ -537,6 +538,7 @@ message ButtonRenderer {
     bool is_disabled = 3;
     TextRuns text = 5;
     Icon icon = 8;
+    InnertubeCommand navigation_endpoint = 9;
     AccessibilityData accessibility = 10;
     bytes tracking_params = 13;
     InnertubeCommand command = 19;
@@ -725,11 +727,48 @@ message RecognitionShelfRenderer {
     RecognitionShelfSurface surface = 5;
 }
 
+message MiniplayerRenderer {
+    PlaybackMode playback_mode = 1;
+}
+
+message CaptionTrack {
+    string base_url = 1;
+    TextRuns name = 2;
+    string vss_id = 3;
+    string language_code = 4;
+    string kind = 5;
+    bool is_translatable = 7;
+    string track_name = 11;
+}
+
+message AudioTrack {
+    repeated int32 caption_track_indices = 2 [packed = false];
+}
+
+message TranslationLanguage {
+    string language_code = 1;
+    TextRuns language_name = 2;
+}
+
+message PlayerCaptionsTracklistRenderer {
+    repeated CaptionTrack caption_tracks = 1 [packed = false];
+    repeated AudioTrack audio_tracks = 2 [packed = false];
+    repeated TranslationLanguage translation_languages = 3 [packed = false];
+    int32 default_audio_track_index = 4;
+    repeated int32 default_translation_source_track_indices = 6 [packed = false];
+}
+
+message PlayerAttestationRenderer {
+    string challenge = 1;
+}
+
 message Renderer {
     oneof renderers {
         SectionListRenderer section_list_renderer                                                   = 49399797;
         ItemSectionRenderer item_section_renderer                                                   = 50195462;
+        PlayerCaptionsTracklistRenderer player_captions_tracklist_renderer                          = 51621377;
         CompanionAdRenderer companion_ad_renderer                                                   = 55514441;
+        PlayerAttestationRenderer player_attestation_renderer                                       = 59961494;
         ButtonRenderer button_renderer                                                              = 65153809;
         MenuRenderer menu_renderer                                                                  = 66439850;
         MenuNavigationItemRenderer menu_navigation_item_renderer                                    = 66441108;
@@ -739,6 +778,7 @@ message Renderer {
         ReportFormModalRenderer report_form_modal_renderer                                          = 113762946;
         EngagementPanelSectionListRenderer engagement_panel_section_list_renderer                   = 138681066;
         EngagementPanelTitleHeaderRenderer engagement_panel_title_header_renderer                   = 138681548;
+        MiniplayerRenderer miniplayer_renderer                                                      = 207720144;
         ContentElementRendererMultiple slim_video_metadata_section_renderer                         = 216561405;
         FactoidRenderer factoid_renderer                                                            = 324315956;
         SentimentFactoidRenderer sentiment_factoid_renderer                                         = 327708604;

@@ -29,6 +29,8 @@ message ServiceTrackingParam {
 message ResponseContext {
     string visitor_data = 2;
     repeated ServiceTrackingParam service_tracking_params = 6;
+    int32 max_age_seconds = 7;
+    string rollout_token = 30;
 }
 
 message StringContent {
@@ -230,6 +232,16 @@ enum ButtonState {
 enum RecognitionShelfSurface {
     RECOGNITION_SHELF_SURFACE_UNKNOWN = 0;
     RECOGNITION_SHELF_SURFACE_VIDEO_DESCRIPTION = 2;
+}
+
+enum PlaybackMode {
+    PLAYBACK_MODE_UNKNOWN = 0;
+    PLAYBACK_MODE_ALLOW = 2;
+}
+
+enum MdeStreamOptimizationsRendererLatency {
+    MDE_STREAM_OPTIMIZATIONS_RENDERER_LATENCY_UNKNOWN = 0;
+    MDE_STREAM_OPTIMIZATIONS_RENDERER_LATENCY_NORMAL = 1;
 }
 
 message Run {
