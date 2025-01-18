@@ -23,6 +23,7 @@ message ClientInfo {
 
     string hl = 1;
     string gl = 2;
+    string visitor_data = 14;
     ClientName client_name = 16;
     string client_version = 17;
     ClientFormFactor client_form_factor = 46;

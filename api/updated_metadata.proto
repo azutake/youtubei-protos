@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+import "common.proto";
+import "command.proto";
+import "api/innertube_context.proto";
+import "api/framework_updates.proto";
+package pfinnertube;
+
+message UpdatedMetadataRequest {
+    InnerTubeContext context = 1;
+    string continuation = 2;
+    string video_id = 3;
+}
+
+message UpdatedMetadataResponse {
+}
