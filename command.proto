@@ -12,6 +12,7 @@ message TextRun {
 
 message TextRuns {
     repeated TextRun runs = 1 [packed = false];
+    string simple_text = 4;
 }
 
 message SetEntityCommand {

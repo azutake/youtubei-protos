@@ -8,9 +8,23 @@ package pfinnertube;
 
 message UpdatedMetadataRequest {
     InnerTubeContext context = 1;
-    string continuation = 2;
-    string video_id = 3;
+    oneof req {
+        string continuation = 2;
+        string video_id = 3;
+    }
+}
+
+message Continuation {
+    message TimedContinuationData {
+        uint32 timeout_ms = 1;
+        string continuation = 2;
+    }
+
+    TimedContinuationData timed_continuation_data = 70339736;
 }
 
 message UpdatedMetadataResponse {
+    ResponseContext response_context = 1;
+    Continuation continuation = 3;
+    FrameworkUpdates framework_updates = 777;
 }

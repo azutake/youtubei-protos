@@ -131,6 +131,42 @@ message FrameworkUpdates {
                     bool button_touch_feedback_enabled = 2;
                 }
 
+                message ViewCountEntity {
+                    string key = 1;
+                    TextRuns view_count = 2;
+                    TextRuns extra_short_view_count = 4;
+                    uint32 view_count_length = 7;
+                    TextRuns unlabeled_view_count_value = 10;
+                    TextRuns view_count_label = 11;
+                    uint64 view_count_number = 12;
+                }
+
+                message LikeCountEntity {
+                    string key = 1;
+                    AttributedString like_count_if_liked = 4;
+                    AttributedString like_count_if_disliked = 5;
+                    AttributedString like_count_if_indifferent = 6;
+                    AttributedString expanded_like_count_if_liked = 7;
+                    AttributedString expanded_like_count_if_disliked = 8;
+                    AttributedString expanded_like_count_if_indifferent = 9;
+                    AttributedString like_count_label = 10;
+                    AttributedString like_button_a11y_text = 11;
+                    uint64 like_count_if_liked_number = 12;
+                    uint64 like_count_if_disliked_number = 13;
+                    uint64 like_count_if_indifferent_number = 14;
+                    bool should_expand_like_count = 15;
+                    AttributedString sentiment_factoid_a11y_text_if_liked = 17;
+                    AttributedString sentiment_factoid_a11y_text_if_disliked = 18;
+                }
+
+                message UploadTimeEntity {
+                    string key = 1;
+                    AttributedString compact_past_time = 2;
+                    AttributedString compact_time_ago = 3;
+                    AttributedString time_label = 4;
+                    AttributedString compact_time_ago_a11y_text = 5;
+                }
+
                 oneof payload {
                     CommentSharedEntityPayload comment_shared_entity_payload                                = 43;
                     SubscriptionStateEntity subscription_state_entity                                       = 51;
@@ -138,6 +174,7 @@ message FrameworkUpdates {
                     SubscriptionNotificationSetting subscription_notification_setting                       = 82;
                     SubscriptionNotificationStateEntity subscription_notification_state_entity              = 140;
                     FilterChipBarEntity filter_chip_bar_entity                                              = 189;
+                    ViewCountEntity view_count_entity                                                       = 194;
                     ButtonTouchFeedback button_touch_feedback                                               = 203;
                     CommentComposerTextStateEntityPayload comment_composer_text_state_entity_payload        = 214;
                     CommentComposerButtonStateEntityPayload comment_composer_button_state_entity_payload    = 215;
@@ -147,6 +184,8 @@ message FrameworkUpdates {
                     CommentComposerControlsEntityPayload comment_composer_controls_entity_payload           = 327;
                     TranscriptSearchBoxStateEntity transcript_search_box_state_entity                       = 341;
                     ProductCarouselInnerData product_carousel_inner_data                                    = 378;
+                    LikeCountEntity like_count_entity                                                       = 445;
+                    UploadTimeEntity upload_time_entity                                                     = 459;
                 }
             }
 
