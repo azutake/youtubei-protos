@@ -103,14 +103,7 @@ message PlayabilityStatus {
 }
 
 message PlayerVideoDetails {
-    message Thumbnail {
-        message ThumbnailData {
-            string url = 1;
-            int32 width = 2;
-            int32 height = 3;
-        }
-        repeated ThumbnailData thumbnails = 1 [packed = false];
-    }
+    
     string video_id = 1;
     string title = 15;
     uint32 length_seconds = 16;
@@ -119,7 +112,7 @@ message PlayerVideoDetails {
     bool is_owner_viewing = 20;
     string short_description = 21;
     bool is_crawlable = 22;
-    Thumbnail thumbnail = 25;
+    PlayerThumbnail thumbnail = 25;
     bool allow_ratings = 31;
     string view_count = 32;
     string author = 33;
@@ -143,6 +136,7 @@ message PlayerResponse {
   PlayerVideoDetails video_details = 11;
   PlayerConfig player_config = 15;
   Renderer storyboards = 16;
+  Renderer microformat = 19;
   bytes tracking_params = 21;
   Renderer attestation = 22;
   Renderer endscreen = 32;

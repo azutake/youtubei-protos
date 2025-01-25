@@ -15,6 +15,15 @@ message TextRuns {
     string simple_text = 4;
 }
 
+message PlayerThumbnail {
+    message ThumbnailData {
+        string url = 1;
+        int32 width = 2;
+        int32 height = 3;
+    }
+    repeated ThumbnailData thumbnails = 1 [packed = false];
+}
+
 message SetEntityCommand {
     string identifier = 1;
     bytes entity = 2;
@@ -763,12 +772,46 @@ message PlayerAttestationRenderer {
     string challenge = 1;
 }
 
+message PlayerMicroformatRenderer {
+    message Embed {
+        string iframe_url = 1;
+        uint32 width = 3;
+        uint32 height = 4;
+    }
+
+    message LiveBroadcastDetails {
+        bool is_live_now = 1;
+        string start_timestamp = 2;
+        string end_timestamp = 3;
+    }
+
+    PlayerThumbnail thumbnail = 1;
+    Embed embed = 2;
+    TextRuns title = 3;
+    TextRuns description = 4;
+    uint32 length_seconds = 5;
+    string owner_profile_url = 6;
+    string external_channel_id = 8;
+    bool is_family_safe = 9;
+    repeated string available_countries = 10 [packed = false];
+    bool is_unlisted = 11;
+    bool has_ypc_metadata = 12;
+    string view_count = 14;
+    string category = 15;
+    string published_date = 16;
+    string owner_channel_name = 17;
+    LiveBroadcastDetails live_broadcast_details = 18;
+    string upload_date = 19;
+    bool is_shorts_eligible = 22;
+}
+
 message Renderer {
     oneof renderers {
         SectionListRenderer section_list_renderer                                                   = 49399797;
         ItemSectionRenderer item_section_renderer                                                   = 50195462;
         PlayerCaptionsTracklistRenderer player_captions_tracklist_renderer                          = 51621377;
         CompanionAdRenderer companion_ad_renderer                                                   = 55514441;
+        PlayerMicroformatRenderer player_microformat_renderer                                       = 58514816;
         PlayerAttestationRenderer player_attestation_renderer                                       = 59961494;
         ButtonRenderer button_renderer                                                              = 65153809;
         MenuRenderer menu_renderer                                                                  = 66439850;

@@ -4,15 +4,15 @@ package pfinnertube;
 
 enum ClientName {
     UNKNOWN_CLIENT_NAME = 0;
+    WEB = 1;
     ANDROID = 3;
     IOS = 5;
-    ANDROID_TV = 23;
-    MANGO_ANDROID = 38;
 }
 
 enum ClientFormFactor {
     UNKNOWN_CLIENT_FORM_FACTOR = 0;
     SMALL_FORM_FACTOR = 1;
+    LARGE_FORM_FACTOR = 2;
 }
 
 message ClientInfo {
