@@ -96,6 +96,8 @@ message PlayabilityStatus {
     }
 
     Status status = 1;
+    string reason = 2;
+    Renderer error_screen = 8;
     bool playable_in_embed = 9;
     Renderer offlineability = 10;
     Renderer miniplayer = 24;

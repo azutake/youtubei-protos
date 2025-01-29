@@ -805,12 +805,18 @@ message PlayerMicroformatRenderer {
     bool is_shorts_eligible = 22;
 }
 
+message PlayerErrorMessageRenderer {
+    TextRuns subreason = 1;
+    TextRuns reason = 3;
+}
+
 message Renderer {
     oneof renderers {
         SectionListRenderer section_list_renderer                                                   = 49399797;
         ItemSectionRenderer item_section_renderer                                                   = 50195462;
         PlayerCaptionsTracklistRenderer player_captions_tracklist_renderer                          = 51621377;
         CompanionAdRenderer companion_ad_renderer                                                   = 55514441;
+        PlayerErrorMessageRenderer player_error_message_renderer                                    = 58356580;
         PlayerMicroformatRenderer player_microformat_renderer                                       = 58514816;
         PlayerAttestationRenderer player_attestation_renderer                                       = 59961494;
         ButtonRenderer button_renderer                                                              = 65153809;
