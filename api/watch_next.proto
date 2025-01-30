@@ -30,7 +30,7 @@ message NextContents {
 
 message WatchNextResponse {
     ResponseContext response_context = 1;
-    NextContents contents = 7;
+    Renderer contents = 7;
     bytes tracking_params = 13;
     Renderer player_overlays = 14;
     InnertubeCommand current_video_endpoint = 9;

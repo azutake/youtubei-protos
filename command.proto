@@ -15,15 +15,6 @@ message TextRuns {
     string simple_text = 4;
 }
 
-message PlayerThumbnail {
-    message ThumbnailData {
-        string url = 1;
-        int32 width = 2;
-        int32 height = 3;
-    }
-    repeated ThumbnailData thumbnails = 1 [packed = false];
-}
-
 message SetEntityCommand {
     string identifier = 1;
     bytes entity = 2;
@@ -694,6 +685,14 @@ message ThumbnailDetails {
         repeated ProductItem.ThumbnailSource sources = 1 [packed = false];
     }
 
+    message Thumbnail {
+        string url = 1;
+        int32 width = 2;
+        int32 height = 3;
+    }
+
+    repeated Thumbnail thumbnails = 1 [packed = false];
+
     ElementsImage elements_image = 10;
 }
 
@@ -785,7 +784,7 @@ message PlayerMicroformatRenderer {
         string end_timestamp = 3;
     }
 
-    PlayerThumbnail thumbnail = 1;
+    ThumbnailDetails thumbnail = 1;
     Embed embed = 2;
     TextRuns title = 3;
     TextRuns description = 4;
@@ -810,11 +809,60 @@ message PlayerErrorMessageRenderer {
     TextRuns reason = 3;
 }
 
+message SingleColumnWatchNextResultsRenderer {
+
+}
+
+message TwoColumnWatchNextResultsRenderer {
+    Renderer results = 1;
+    Renderer secondary_results = 2;
+}
+
+message VideoPrimaryInfoRenderer {
+    TextRuns title = 1;
+    Renderer view_count = 3;
+    Renderer video_actions = 4;
+}
+
+message VideoViewCountRenderer {
+    TextRuns view_count = 1;
+    TextRuns extra_short_view_count = 5;
+    string entity_key = 6;
+    uint64 original_view_count = 9;
+}
+
+message WatchNextSecondaryResultsRenderer {
+    repeated Renderer results = 1 [packed = false];
+}
+
+message CompactVideoRenderer {
+    string video_id = 1;
+    ThumbnailDetails thumbnail = 2;
+    TextRuns title = 3;
+    TextRuns long_byline_text = 4;
+    TextRuns published_time_text = 5;
+    TextRuns view_count_text = 6;
+    TextRuns length_text = 7;
+    InnertubeCommand navigation_endpoint = 8;
+    TextRuns short_byline_text = 10;
+    repeated Renderer badges = 13 [packed = false];
+    ThumbnailDetails channel_thumbnail = 14;
+    repeated Renderer owner_badges = 15 [packed = false];
+    bytes trakcing_params = 18;
+    TextRuns short_view_count_text = 23;
+    Renderer menu = 25;
+    repeated Renderer thumbnail_overlays = 32 [packed = false];
+}
+
 message Renderer {
     oneof renderers {
         SectionListRenderer section_list_renderer                                                   = 49399797;
         ItemSectionRenderer item_section_renderer                                                   = 50195462;
+        CompactVideoRenderer compact_video_renderer                                                 = 50630979;
         PlayerCaptionsTracklistRenderer player_captions_tracklist_renderer                          = 51621377;
+        SingleColumnWatchNextResultsRenderer single_column_watch_next_results                       = 51779735;
+        TwoColumnWatchNextResultsRenderer two_column_watch_next_results                             = 51779759;
+        WatchNextSecondaryResultsRenderer secondary_results                                         = 51779776;
         CompanionAdRenderer companion_ad_renderer                                                   = 55514441;
         PlayerErrorMessageRenderer player_error_message_renderer                                    = 58356580;
         PlayerMicroformatRenderer player_microformat_renderer                                       = 58514816;
@@ -823,8 +871,10 @@ message Renderer {
         MenuRenderer menu_renderer                                                                  = 66439850;
         MenuNavigationItemRenderer menu_navigation_item_renderer                                    = 66441108;
         MenuServiceItemRenderer menu_service_item_renderer                                          = 66441155;
+        VideoViewCountRenderer video_view_count_renderer                                            = 70044402;
         OptionsRenderer options_renderer                                                            = 77875886;
         PlayerOverlayRenderer player_overlay_renderer                                               = 78882851;
+        VideoPrimaryInfoRenderer video_primary_info_renderer                                        = 100048340;
         ReportFormModalRenderer report_form_modal_renderer                                          = 113762946;
         EngagementPanelSectionListRenderer engagement_panel_section_list_renderer                   = 138681066;
         EngagementPanelTitleHeaderRenderer engagement_panel_title_header_renderer                   = 138681548;
