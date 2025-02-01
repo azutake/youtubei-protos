@@ -114,7 +114,7 @@ message PlayerVideoDetails {
     bool is_owner_viewing = 20;
     string short_description = 21;
     bool is_crawlable = 22;
-    PlayerThumbnail thumbnail = 25;
+    ThumbnailDetails thumbnail = 25;
     bool allow_ratings = 31;
     string view_count = 32;
     string author = 33;
