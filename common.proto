@@ -244,6 +244,16 @@ enum MdeStreamOptimizationsRendererLatency {
     MDE_STREAM_OPTIMIZATIONS_RENDERER_LATENCY_NORMAL = 1;
 }
 
+enum ContinuationTrigger {
+    CONTINUATION_TRIGGER_UNKNOWN = 0;
+    CONTINUATION_TRIGGER_ON_ITEM_SHOWN = 1;
+}
+
+enum ContinuationRequestType {
+    CONTINUATION_REQUEST_TYPE_UNKNOWN = 0;
+    CONTINUATION_REQUEST_TYPE_WATCH_NEXT = 2;
+}
+
 message Run {
     int32 start_index = 1;
     int32 length = 2;

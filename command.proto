@@ -184,6 +184,11 @@ message OnTap {
     OptimisticUpdateCommand optimistic_update_command           = 170382629;
 }
 
+message ContinuationCommand {
+    string token = 1;
+    ContinuationRequestType request = 2;
+}
+
 message InnertubeCommand {
     bytes click_tracking_params = 2;
     oneof command {
@@ -207,6 +212,7 @@ message InnertubeCommand {
         DynamicEntitiesCommand dynamic_entities_command                                                 = 206181248;
         ClickLoggingWrapperCommand click_logging_wrapper_command                                        = 222848684;
         ShowActionSheetCommand show_action_sheet_command                                                = 278463287;
+        ContinuationCommand continuation_command                                                        = 280298060;
         LogBackToAppEventCommand log_back_to_app_event_command                                          = 300210387;
         DismissComposerCommand dismiss_composer_command                                                 = 427304386;
         OpenExternalUrlWithPictureInPictureCommand open_external_url_with_picture_in_picture_command    = 428788994;
@@ -854,6 +860,11 @@ message CompactVideoRenderer {
     repeated Renderer thumbnail_overlays = 32 [packed = false];
 }
 
+message ContinuationItemRenderer {
+    ContinuationTrigger trigger = 1;
+    InnertubeCommand continuation_endpoint = 2;
+}
+
 message Renderer {
     oneof renderers {
         SectionListRenderer section_list_renderer                                                   = 49399797;
@@ -878,6 +889,7 @@ message Renderer {
         ReportFormModalRenderer report_form_modal_renderer                                          = 113762946;
         EngagementPanelSectionListRenderer engagement_panel_section_list_renderer                   = 138681066;
         EngagementPanelTitleHeaderRenderer engagement_panel_title_header_renderer                   = 138681548;
+        ContinuationItemRenderer continuation_item_renderer                                         = 159495980;
         MiniplayerRenderer miniplayer_renderer                                                      = 207720144;
         ContentElementRendererMultiple slim_video_metadata_section_renderer                         = 216561405;
         FactoidRenderer factoid_renderer                                                            = 324315956;

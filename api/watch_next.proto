@@ -10,6 +10,7 @@ package pfinnertube;
 message WatchNextRequest {
     InnerTubeContext context = 1;
     string video_id = 2;
+    string continuation = 8;
 }
 
 message SingleColumnWatchNextResultsResultsResults {
