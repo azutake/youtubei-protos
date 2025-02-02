@@ -36,6 +36,7 @@ message WatchNextResponse {
     Renderer player_overlays = 14;
     InnertubeCommand current_video_endpoint = 9;
     Renderer video_reporting = 16;
+    repeated InnertubeCommand on_response_received_endpoints = 21 [packed = false];
     repeated Renderer engagement_panels = 25 [packed = false];
     repeated Renderer page_visual_effects = 44 [packed = false];
     FrameworkUpdates framework_updates = 777;

@@ -189,6 +189,10 @@ message ContinuationCommand {
     ContinuationRequestType request = 2;
 }
 
+message AppendContinuationItemsAction {
+    repeated Renderer continuation_items = 2 [packed = false];
+}
+
 message InnertubeCommand {
     bytes click_tracking_params = 2;
     oneof command {
@@ -204,6 +208,7 @@ message InnertubeCommand {
         ParamsEndpoint get_report_form_endpoint                                                         = 113762617;
         ParamsEndpoint ypc_get_offline_upsell_endpoint                                                  = 133724106;
         ShowEngagementPanelEndpoint show_engagement_panel_endpoint                                      = 138681778;
+        AppendContinuationItemsAction append_continuation_items_action                                  = 160980450;
         InnertubeCommand innertube_command                                                              = 169495254;
         SerialCommand serial_command                                                                    = 170382688;
         SetEntityCommand set_entity_command                                                             = 170382720;
