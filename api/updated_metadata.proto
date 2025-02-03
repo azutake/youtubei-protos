@@ -1,4 +1,4 @@
-syntax = "proto3";
+syntax = "proto2";
 
 import "common.proto";
 import "command.proto";
@@ -7,7 +7,7 @@ import "api/framework_updates.proto";
 package pfinnertube;
 
 message UpdatedMetadataRequest {
-    InnerTubeContext context = 1;
+    optional InnerTubeContext context = 1;
     oneof req {
         string continuation = 2;
         string video_id = 3;
@@ -16,15 +16,15 @@ message UpdatedMetadataRequest {
 
 message Continuation {
     message TimedContinuationData {
-        uint32 timeout_ms = 1;
-        string continuation = 2;
+        optional uint32 timeout_ms = 1;
+        required string continuation = 2;
     }
 
-    TimedContinuationData timed_continuation_data = 70339736;
+    optional TimedContinuationData timed_continuation_data = 70339736;
 }
 
 message UpdatedMetadataResponse {
-    ResponseContext response_context = 1;
-    Continuation continuation = 3;
-    FrameworkUpdates framework_updates = 777;
+    optional ResponseContext response_context = 1;
+    optional Continuation continuation = 3;
+    optional FrameworkUpdates framework_updates = 777;
 }

@@ -1,4 +1,4 @@
-syntax = "proto3";
+syntax = "proto2";
 
 import "google/protobuf/duration.proto";
 import "common.proto";
@@ -12,37 +12,37 @@ message FrameworkUpdates {
             message Payload {
                 message CommentSharedEntityPayload {
                     message QuickEmoji {
-                        string key = 1;
-                        bytes tracking_params = 2;
-                        LoggingDirectives logging_directives = 999;
+                        required string key = 1;
+                        optional bytes tracking_params = 2;
+                        optional LoggingDirectives logging_directives = 999;
                     }
 
-                    string key = 1;
+                    required string key = 1;
                     repeated QuickEmoji quick_emojis = 9 [packed = false];
                 }
 
                 message SubscriptionStateEntity {
-                    string key = 1;
-                    bool subscribed = 2;
+                    required string key = 1;
+                    optional bool subscribed = 2;
                 }
 
                 message SubscriptionNotificationSetting {
-                    string key = 1;
-                    SubscriptionNotificationSettingState state = 2;
+                    required string key = 1;
+                    optional SubscriptionNotificationSettingState state = 2;
                 }
 
                 message SubscriptionNotificationStateEntity {
-                    string key = 1;
-                    SubscriptionNotificationState state = 2;
+                    required string key = 1;
+                    optional SubscriptionNotificationState state = 2;
                 }
 
                 message FilterChipBarEntity {
                     message FilterChipData {
                         message ActiveContentData {
                             message ChipData {
-                                string text = 1;
-                                string original_text = 2;
-                                bool selected = 3;
+                                required string text = 1;
+                                required string original_text = 2;
+                                optional bool selected = 3;
                             }
 
                             message SortingFiltering {
@@ -51,120 +51,120 @@ message FrameworkUpdates {
                                         repeated AuthorRelation values = 1;
                                     }
 
-                                    AuthorRelationIn author_relation_in = 2;
-                                    SortBy sort_by = 7;
-                                    bool fetch_only_top_level_comments_by_sponsors = 8;
+                                    optional AuthorRelationIn author_relation_in = 2;
+                                    optional SortBy sort_by = 7;
+                                    optional bool fetch_only_top_level_comments_by_sponsors = 8;
                                 }
 
-                                CommentsFilter comments_filter = 3;
+                                optional CommentsFilter comments_filter = 3;
                             }
 
-                            ChipData chip_data = 1;
-                            SortingFiltering sorting_filtering = 2;
-                            ChipIcon chip_icon = 5;
+                            optional ChipData chip_data = 1;
+                            optional SortingFiltering sorting_filtering = 2;
+                            optional ChipIcon chip_icon = 5;
                         }
 
-                        string id = 1;
-                        ActiveContentData active_content_data = 2;
-                        string modal_id = 6;
+                        required string id = 1;
+                        optional ActiveContentData active_content_data = 2;
+                        required string modal_id = 6;
                     }
 
-                    string key = 1;
+                    required string key = 1;
                     repeated FilterChipData filter_chip_data = 3;
                 }
 
                 message CommentComposerControlsEntityPayload {
-                    string key = 1;
-                    string create_comment_params = 2;
+                    required string key = 1;
+                    required string create_comment_params = 2;
                 }
 
                 message CommentComposerTextStateEntityPayload {
-                    string key = 1;
-                    InnertubeCommand dismiss_dialog_command = 19;
+                    required string key = 1;
+                    optional InnertubeCommand dismiss_dialog_command = 19;
                 }
 
                 message CommentComposerButtonStateEntityPayload {
-                    string key = 1;
-                    bool is_timestamp_button_enabled = 2;
-                    bool is_sending = 4;
-                    bool is_emoji_picker_enabled = 5;
-                    bool is_emoji_picker_toggled = 6;
-                    bool is_timestamp_button_supported = 7;
-                    string send_button_a11y = 11;
-                    string send_button_disabled_a11y = 12;
-                    string confirm_button_a11y = 13;
-                    string confirm_button_disabled_a11y = 14;
-                    string short_creation_button_a11y = 15;
-                    string timestamp_button_a11y = 16;
-                    string timestamp_button_disabled_a11y = 17;
-                    string emoji_picker_button_a11y = 18;
+                    required string key = 1;
+                    optional bool is_timestamp_button_enabled = 2;
+                    optional bool is_sending = 4;
+                    optional bool is_emoji_picker_enabled = 5;
+                    optional bool is_emoji_picker_toggled = 6;
+                    optional bool is_timestamp_button_supported = 7;
+                    required string send_button_a11y = 11;
+                    required string send_button_disabled_a11y = 12;
+                    required string confirm_button_a11y = 13;
+                    required string confirm_button_disabled_a11y = 14;
+                    required string short_creation_button_a11y = 15;
+                    required string timestamp_button_a11y = 16;
+                    required string timestamp_button_disabled_a11y = 17;
+                    required string emoji_picker_button_a11y = 18;
                 }
 
                 message CommentComposerTimestampEntityPayload {
-                    string key = 1;
-                    string latest_timestamp_text = 2;
+                    required string key = 1;
+                    required string latest_timestamp_text = 2;
                 }
 
                 message ProductCarouselInnerData {
                     repeated ProductItem product_items = 3 [packed = false];
-                    bytes tracking_params = 4;
+                    optional bytes tracking_params = 4;
                 }
 
                 message VideoActionButtonEnablementEntity {
-                    string video_action_button_enablement_entity_key = 1;
-                    bool enabled = 2;
+                    required string video_action_button_enablement_entity_key = 1;
+                    optional bool enabled = 2;
                 }
 
                 message TranscriptTrackSelectionEntity {
-                    string key = 1;
-                    int32 selected_track_index = 2;
-                    string serialized_params = 3;
+                    required string key = 1;
+                    optional int32 selected_track_index = 2;
+                    required string serialized_params = 3;
                 }
 
                 message TranscriptSearchBoxStateEntity {
-                    string key = 1;
-                    bool is_hidden = 2;
+                    required string key = 1;
+                    optional bool is_hidden = 2;
                 }
 
                 message ButtonTouchFeedback {
-                    string key = 1;
-                    bool button_touch_feedback_enabled = 2;
+                    required string key = 1;
+                    optional bool button_touch_feedback_enabled = 2;
                 }
 
                 message ViewCountEntity {
-                    string key = 1;
-                    TextRuns view_count = 2;
-                    TextRuns extra_short_view_count = 4;
-                    uint32 view_count_length = 7;
-                    TextRuns unlabeled_view_count_value = 10;
-                    TextRuns view_count_label = 11;
-                    uint64 view_count_number = 12;
+                    required string key = 1;
+                    optional TextRuns view_count = 2;
+                    optional TextRuns extra_short_view_count = 4;
+                    required uint32 view_count_length = 7;
+                    optional TextRuns unlabeled_view_count_value = 10;
+                    optional TextRuns view_count_label = 11;
+                    required uint64 view_count_number = 12;
                 }
 
                 message LikeCountEntity {
-                    string key = 1;
-                    AttributedString like_count_if_liked = 4;
-                    AttributedString like_count_if_disliked = 5;
-                    AttributedString like_count_if_indifferent = 6;
-                    AttributedString expanded_like_count_if_liked = 7;
-                    AttributedString expanded_like_count_if_disliked = 8;
-                    AttributedString expanded_like_count_if_indifferent = 9;
-                    AttributedString like_count_label = 10;
-                    AttributedString like_button_a11y_text = 11;
-                    uint64 like_count_if_liked_number = 12;
-                    uint64 like_count_if_disliked_number = 13;
-                    uint64 like_count_if_indifferent_number = 14;
-                    bool should_expand_like_count = 15;
-                    AttributedString sentiment_factoid_a11y_text_if_liked = 17;
-                    AttributedString sentiment_factoid_a11y_text_if_disliked = 18;
+                    required string key = 1;
+                    optional AttributedString like_count_if_liked = 4;
+                    optional AttributedString like_count_if_disliked = 5;
+                    optional AttributedString like_count_if_indifferent = 6;
+                    optional AttributedString expanded_like_count_if_liked = 7;
+                    optional AttributedString expanded_like_count_if_disliked = 8;
+                    optional AttributedString expanded_like_count_if_indifferent = 9;
+                    optional AttributedString like_count_label = 10;
+                    optional AttributedString like_button_a11y_text = 11;
+                    optional uint64 like_count_if_liked_number = 12;
+                    optional uint64 like_count_if_disliked_number = 13;
+                    required uint64 like_count_if_indifferent_number = 14;
+                    required bool should_expand_like_count = 15;
+                    optional AttributedString sentiment_factoid_a11y_text_if_liked = 17;
+                    optional AttributedString sentiment_factoid_a11y_text_if_disliked = 18;
                 }
 
                 message UploadTimeEntity {
-                    string key = 1;
-                    AttributedString compact_past_time = 2;
-                    AttributedString compact_time_ago = 3;
-                    AttributedString time_label = 4;
-                    AttributedString compact_time_ago_a11y_text = 5;
+                    required string key = 1;
+                    optional AttributedString compact_past_time = 2;
+                    optional AttributedString compact_time_ago = 3;
+                    optional AttributedString time_label = 4;
+                    optional AttributedString compact_time_ago_a11y_text = 5;
                 }
 
                 oneof payload {
@@ -189,51 +189,51 @@ message FrameworkUpdates {
                 }
             }
 
-            string entity_key = 1;
-            EntityMutationType type = 2;
-            Payload payload = 3;
+            required string entity_key = 1;
+            optional EntityMutationType type = 2;
+            optional Payload payload = 3;
         }
 
         repeated Mutation mutations = 1 [packed = false];
-        google.protobuf.Duration timestamp = 2;
+        optional google.protobuf.Duration timestamp = 2;
     }
 
     message ElementUpdate {
         message Update {
             message TemplateUpdate {
-                string identifier = 1;
-                bytes serialized_template_config = 2;
-                uint64 resource_tag = 4;
+                required string identifier = 1;
+                optional bytes serialized_template_config = 2;
+                optional uint64 resource_tag = 4;
                 repeated string dependencies = 5;
             }
 
             message JsModuleSetUpdate {
                 message JsModule {
-                    string identifier = 1;
-                    bytes serialized_module_config = 2;
+                    required string identifier = 1;
+                    optional bytes serialized_module_config = 2;
                     repeated string dependencies = 3 [packed = false];
                 }
 
                 repeated JsModule js_modules = 1 [packed = false];
-                bytes serialized_signer_cert = 2;
-                string cert_identifier = 3;
+                optional bytes serialized_signer_cert = 2;
+                required string cert_identifier = 3;
             }
 
             message ThemeUpdate {
-                string identifier = 1;
-                int64 resource_tag = 3;
-                bytes theme_bytes = 4;
+                required string identifier = 1;
+                optional int64 resource_tag = 3;
+                optional bytes theme_bytes = 4;
             }
 
             message CapabilitiesUpdate {
-                string identifier = 1;
-                bytes capabilities_bytes = 2;
-                int64 resource_tag = 3;
+                required string identifier = 1;
+                optional bytes capabilities_bytes = 2;
+                optional int64 resource_tag = 3;
             }
 
             message StaticDataResources {
                 message Identifier {
-                    string identifier = 1;
+                    required string identifier = 1;
                 }
 
                 repeated Identifier resources = 1 [packed = false];
@@ -241,25 +241,25 @@ message FrameworkUpdates {
 
             message ResourceStatusInResponseCheck {
                 message ResourceStatus {
-                    string identifier = 1;
-                    ElementResourceStatus status = 2;
+                    required string identifier = 1;
+                    optional ElementResourceStatus status = 2;
                 }
 
                 repeated ResourceStatus resource_statuses = 1;
-                string server_build_label = 2;
+                required string server_build_label = 2;
             }
 
-            TemplateUpdate template_update                                  = 196886555;
-            JsModuleSetUpdate js_module_set_update                          = 273577170;
-            ResourceStatusInResponseCheck resource_status_in_response_check = 328964737;
-            ThemeUpdate theme_update                                        = 421320458;
-            CapabilitiesUpdate capabilities_update                          = 423179876;
-            StaticDataResources static_data_resources                       = 426171393;
+            optional TemplateUpdate template_update                                  = 196886555;
+            optional JsModuleSetUpdate js_module_set_update                          = 273577170;
+            optional ResourceStatusInResponseCheck resource_status_in_response_check = 328964737;
+            optional ThemeUpdate theme_update                                        = 421320458;
+            optional CapabilitiesUpdate capabilities_update                          = 423179876;
+            optional StaticDataResources static_data_resources                       = 426171393;
         }
 
         repeated Update updates = 1 [packed = false];
     }
 
-    EntityBatchUpdate entity_batch_update = 1;
-    ElementUpdate element_update = 2;
+    optional EntityBatchUpdate entity_batch_update = 1;
+    optional ElementUpdate element_update = 2;
 }

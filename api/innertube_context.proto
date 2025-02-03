@@ -1,4 +1,4 @@
-syntax = "proto3";
+syntax = "proto2";
 
 package pfinnertube;
 
@@ -21,14 +21,14 @@ message ClientInfo {
         PLATFORM_NAME_IOS = 1;
     }
 
-    string hl = 1;
-    string gl = 2;
-    string visitor_data = 14;
-    ClientName client_name = 16;
-    string client_version = 17;
-    ClientFormFactor client_form_factor = 46;
+    required string hl = 1;
+    required string gl = 2;
+    required string visitor_data = 14;
+    required ClientName client_name = 16;
+    required string client_version = 17;
+    required ClientFormFactor client_form_factor = 46;
 }
 
 message InnerTubeContext {
-    ClientInfo client = 1;
+    optional ClientInfo client = 1;
 }

@@ -254,6 +254,16 @@ enum ContinuationRequestType {
     CONTINUATION_REQUEST_TYPE_WATCH_NEXT = 2;
 }
 
+enum InteractiveTabbedHeaderRendererType {
+    INTERACTIVE_TABBED_HEADER_RENDERER_TYPE_UNKNOWN = 0;
+    INTERACTIVE_TABBED_HEADER_RENDERER_TYPE_GAMING = 1;
+}
+
+enum BadgeStyleType {
+    BADGE_STYLE_TYPE_UNKNOWN = 0;
+    BADGE_STYLE_TYPE_SIMPLE = 1;
+}
+
 message Run {
     int32 start_index = 1;
     int32 length = 2;
@@ -267,6 +277,7 @@ message StyleRun {
     uint32 length = 2;
     string font_name = 3;
     uint32 font_color = 5;
+    uint32 weight = 7;
     FontWeight font_weight = 8;
     StyleRunExtensions style_run_extensions = 10;
     string font_family_name = 14;

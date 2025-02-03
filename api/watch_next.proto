@@ -1,4 +1,4 @@
-syntax = "proto3";
+syntax = "proto2";
 
 import "google/protobuf/duration.proto";
 import "common.proto";
@@ -8,9 +8,9 @@ import "api/framework_updates.proto";
 package pfinnertube;
 
 message WatchNextRequest {
-    InnerTubeContext context = 1;
-    string video_id = 2;
-    string continuation = 8;
+    optional InnerTubeContext context = 1;
+    required string video_id = 2;
+    required string continuation = 8;
 }
 
 message SingleColumnWatchNextResultsResultsResults {
@@ -18,26 +18,26 @@ message SingleColumnWatchNextResultsResultsResults {
 }
 
 message SingleColumnWatchNextResultsResults {
-    SingleColumnWatchNextResultsResultsResults results              = 49399797;
+    optional SingleColumnWatchNextResultsResultsResults results              = 49399797;
 }
 
 message SingleColumnWatchNextResults {
-    SingleColumnWatchNextResultsResults results = 1;
+    optional SingleColumnWatchNextResultsResults results = 1;
 }
 
 message NextContents {
-    SingleColumnWatchNextResults single_column_watch_next_results   = 51779735;
+    optional SingleColumnWatchNextResults single_column_watch_next_results   = 51779735;
 }
 
 message WatchNextResponse {
-    ResponseContext response_context = 1;
-    Renderer contents = 7;
-    bytes tracking_params = 13;
-    Renderer player_overlays = 14;
-    InnertubeCommand current_video_endpoint = 9;
-    Renderer video_reporting = 16;
+    optional ResponseContext response_context = 1;
+    optional Renderer contents = 7;
+    optional bytes tracking_params = 13;
+    optional Renderer player_overlays = 14;
+    optional InnertubeCommand current_video_endpoint = 9;
+    optional Renderer video_reporting = 16;
     repeated InnertubeCommand on_response_received_endpoints = 21 [packed = false];
     repeated Renderer engagement_panels = 25 [packed = false];
     repeated Renderer page_visual_effects = 44 [packed = false];
-    FrameworkUpdates framework_updates = 777;
+    optional FrameworkUpdates framework_updates = 777;
 }

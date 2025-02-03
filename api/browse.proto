@@ -1,4 +1,4 @@
-syntax = "proto3";
+syntax = "proto2";
 
 import "common.proto";
 import "command.proto";
@@ -6,10 +6,14 @@ import "api/innertube_context.proto";
 package pfinnertube;
 
 message BrowseRequest {
-    InnerTubeContext context = 1;
-    string browseId = 2;
+    optional InnerTubeContext context = 1;
+    required string browse_id = 2;
 }
 
 message BrowseResponse {
-  
+  optional ResponseContext response_context = 1;
+  optional Renderer header = 13;
+  optional Renderer metadata = 15;
+  optional bytes tracking_params = 16;
+
 }

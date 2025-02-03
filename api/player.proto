@@ -1,4 +1,4 @@
-syntax = "proto3";
+syntax = "proto2";
 
 import "common.proto";
 import "command.proto";
@@ -7,15 +7,15 @@ import "api/framework_updates.proto";
 package pfinnertube;
 
 message PlayerRequest {
-    InnerTubeContext context = 1;
-    string video_id = 2;
+    optional InnerTubeContext context = 1;
+    required string video_id = 2;
 }
 
 message StreamingData {
     message AdaptiveFormat {
         message Range {
-            uint64 start = 3;
-            uint64 end = 4;
+            optional uint64 start = 3;
+            optional uint64 end = 4;
         }
 
         enum ProjectionType {
@@ -23,29 +23,29 @@ message StreamingData {
             RECTANGULAR = 1;
         }
 
-        int32 itag = 1;
-        string url = 2;
-        string mime_type = 5;
-        uint64 bitrate = 6;
-        uint32 width = 7;
-        uint32 height = 8;
-        Range init_range = 9;
-        Range index_range = 10;
-        uint64 last_modified = 11;
-        uint64 content_length = 12;
-        string quality = 16;
-        uint32 fps = 25;
-        string quality_label = 26;
-        ProjectionType projection_type = 27;
-        uint64 average_bitrate = 31;
-        uint64 approx_duration_ms = 44;
+        optional int32 itag = 1;
+        required string url = 2;
+        required string mime_type = 5;
+        optional uint64 bitrate = 6;
+        optional uint32 width = 7;
+        optional uint32 height = 8;
+        optional Range init_range = 9;
+        optional Range index_range = 10;
+        optional uint64 last_modified = 11;
+        optional uint64 content_length = 12;
+        required string quality = 16;
+        optional uint32 fps = 25;
+        required string quality_label = 26;
+        optional ProjectionType projection_type = 27;
+        optional uint64 average_bitrate = 31;
+        optional uint64 approx_duration_ms = 44;
     }
 
-    uint32 expires_in_seconds = 1;
+    optional uint32 expires_in_seconds = 1;
     repeated AdaptiveFormat adaptive_formats = 3 [packed = false];
-    string hls_manifest_url = 5;
-    float aspect_ratio = 13;
-    string server_abr_streaming_url = 15;
+    required string hls_manifest_url = 5;
+    optional float aspect_ratio = 13;
+    required string server_abr_streaming_url = 15;
 }
 
 message PlaybackTracking {
@@ -56,30 +56,30 @@ message PlaybackTracking {
             VISITOR_ID = 2;
         }
 
-        HeaderType header_type = 1;
+        optional HeaderType header_type = 1;
     }
 
     message TrackingUrl {
-        string base_url = 1;
-        uint32 elapsed_media_time_seconds = 2;
+        required string base_url = 1;
+        optional uint32 elapsed_media_time_seconds = 2;
         repeated Header headers = 3 [packed = false];
     }
 
     message EngageUrl {
-        string base_url = 1;
+        required string base_url = 1;
         repeated Header headers = 2 [packed = false];
     }
 
-    TrackingUrl videostats_playback_url = 1;
-    TrackingUrl videostats_delayplay_url = 2;
-    TrackingUrl videostats_watchtime_url = 3;
-    TrackingUrl ptracking_url = 4;
-    TrackingUrl qoe_url = 5;
-    TrackingUrl atr_url = 13;
-    EngageUrl engage_url = 15;
+    optional TrackingUrl videostats_playback_url = 1;
+    optional TrackingUrl videostats_delayplay_url = 2;
+    optional TrackingUrl videostats_watchtime_url = 3;
+    optional TrackingUrl ptracking_url = 4;
+    optional TrackingUrl qoe_url = 5;
+    optional TrackingUrl atr_url = 13;
+    optional EngageUrl engage_url = 15;
     repeated uint32 videostats_scheduled_flush_walltime_seconds = 16 [packed = false];
-    uint32 videostats_default_flush_interval_seconds = 17;
-    TrackingUrl youtube_remarketing_url = 18;
+    optional uint32 videostats_default_flush_interval_seconds = 17;
+    optional TrackingUrl youtube_remarketing_url = 18;
 }
 
 message PlayabilityStatus {
@@ -95,34 +95,34 @@ message PlayabilityStatus {
 		AGE_VERIFICATION_REQUIRED = 9;
     }
 
-    Status status = 1;
-    string reason = 2;
-    Renderer error_screen = 8;
-    bool playable_in_embed = 9;
-    Renderer offlineability = 10;
-    Renderer miniplayer = 24;
-    string context_params = 31;
+    required Status status = 1;
+    required string reason = 2;
+    optional Renderer error_screen = 8;
+    required bool playable_in_embed = 9;
+    optional Renderer offlineability = 10;
+    optional Renderer miniplayer = 24;
+    required string context_params = 31;
 }
 
 message PlayerVideoDetails {
     
-    string video_id = 1;
-    string title = 15;
-    uint32 length_seconds = 16;
+    required string video_id = 1;
+    required string title = 15;
+    optional uint32 length_seconds = 16;
     repeated string keywords = 18 [packed = false];
-    string channel_id = 19;
-    bool is_owner_viewing = 20;
-    string short_description = 21;
-    bool is_crawlable = 22;
-    ThumbnailDetails thumbnail = 25;
-    bool allow_ratings = 31;
-    string view_count = 32;
-    string author = 33;
-    bool is_low_latency_live_stream = 35;
-    bool is_private = 37;
-    bool is_unplugged_corpus = 38;
-    MdeStreamOptimizationsRendererLatency latency_class = 39;
-    bool is_live_content = 41;
+    required string channel_id = 19;
+    optional bool is_owner_viewing = 20;
+    required string short_description = 21;
+    optional bool is_crawlable = 22;
+    optional ThumbnailDetails thumbnail = 25;
+    optional bool allow_ratings = 31;
+    required string view_count = 32;
+    required string author = 33;
+    optional bool is_low_latency_live_stream = 35;
+    optional bool is_private = 37;
+    optional bool is_unplugged_corpus = 38;
+    optional MdeStreamOptimizationsRendererLatency latency_class = 39;
+    optional bool is_live_content = 41;
 }
 
 message PlayerConfig {
@@ -130,23 +130,23 @@ message PlayerConfig {
 }
 
 message PlayerResponse {
-  ResponseContext response_context = 1;
-  PlayabilityStatus playability_status = 2;
-  StreamingData streaming_data = 4;
-  PlaybackTracking playback_tracking = 9;
-  Renderer captions = 10;
-  PlayerVideoDetails video_details = 11;
-  PlayerConfig player_config = 15;
-  Renderer storyboards = 16;
-  Renderer microformat = 19;
-  bytes tracking_params = 21;
-  Renderer attestation = 22;
-  Renderer endscreen = 32;
+  optional ResponseContext response_context = 1;
+  optional PlayabilityStatus playability_status = 2;
+  optional StreamingData streaming_data = 4;
+  optional PlaybackTracking playback_tracking = 9;
+  optional Renderer captions = 10;
+  optional PlayerVideoDetails video_details = 11;
+  optional PlayerConfig player_config = 15;
+  optional Renderer storyboards = 16;
+  optional Renderer microformat = 19;
+  optional bytes tracking_params = 21;
+  optional Renderer attestation = 22;
+  optional Renderer endscreen = 32;
   repeated InnertubeCommand on_response_received_endpoints = 36 [packed = false];
-  Renderer overlay = 42;
+  optional Renderer overlay = 42;
   repeated Renderer player_overlay_layer_renderers = 60 [packed = false];
-  string ad_break_heartbeat_params = 69;
-  FrameworkUpdates framework_updates = 777;
+  required string ad_break_heartbeat_params = 69;
+  optional FrameworkUpdates framework_updates = 777;
 }
 
 // https://youtubei.googleapis.com/youtubei/v1/get_watch?id=W4bMYwTSYPA

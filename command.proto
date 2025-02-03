@@ -1,4 +1,4 @@
-syntax = "proto3";
+syntax = "proto2";
 
 import "common.proto";
 import "theme.proto";
@@ -6,35 +6,35 @@ import "context.proto";
 package pfinnertube;
 
 message TextRun {
-    string text = 1;
-    InnertubeCommand navigation_endpoint = 5;
+    required string text = 1;
+    optional InnertubeCommand navigation_endpoint = 5;
 }
 
 message TextRuns {
     repeated TextRun runs = 1 [packed = false];
-    string simple_text = 4;
+    required string simple_text = 4;
 }
 
 message SetEntityCommand {
-    string identifier = 1;
-    bytes entity = 2;
+    required string identifier = 1;
+    optional bytes entity = 2;
 }
 
 message DismissComposerCommand {
-    bool hack = 1;
+    optional bool hack = 1;
 }
 
 message YpcOffsetEndpoint {
-    string params = 1;
+    required string params = 1;
 }
 
 message SubscribeEndpoint {
     repeated string channel_ids = 1 [packed = false];
-    string params = 3;
+    required string params = 3;
 }
 
 message SignInEndpoint {
-    InnertubeCommand next_endpoint = 2;
+    optional InnertubeCommand next_endpoint = 2;
 }
 
 message CommandExecutorCommand {
@@ -42,9 +42,9 @@ message CommandExecutorCommand {
 }
 
 message ShowEngagementPanelEndpoint {
-    string panel_identifier = 1;
-    bool force_portrait = 5;
-    EngagementPanelExtras engagement_panel_extras = 9;
+    required string panel_identifier = 1;
+    optional bool force_portrait = 5;
+    optional EngagementPanelExtras engagement_panel_extras = 9;
 }
 
 message WatchEndpointSupportedOnesieConfig {
@@ -54,26 +54,26 @@ message WatchEndpointSupportedOnesieConfig {
 }
 
 message IosPlaybackOnesieConfig {
-    CommonConfig common_config = 1;
+    optional CommonConfig common_config = 1;
 }
 
 message CommonConfig {
-    string url = 1;
-    bytes ustreamer_config = 4;
+    required string url = 1;
+    optional bytes ustreamer_config = 4;
 }
 
 message WatchEndpoint {
     message CoWatchabilityTypeMessage {
-        CoWatchabilityType type = 1;
+        optional CoWatchabilityType type = 1;
     }
-    string video_id = 1;
-    bytes ustreamer_config = 28;
-    CoWatchabilityTypeMessage cowatchability = 34;
-    WatchEndpointSupportedOnesieConfig watch_endpoint_supported_onesie_config = 79857908;
+    required string video_id = 1;
+    optional bytes ustreamer_config = 28;
+    optional CoWatchabilityTypeMessage cowatchability = 34;
+    optional WatchEndpointSupportedOnesieConfig watch_endpoint_supported_onesie_config = 79857908;
 }
 
 message FeedbackEndpoint {
-    string feedback_token = 1;
+    required string feedback_token = 1;
 }
 
 message UrlEndpoint {
@@ -81,33 +81,33 @@ message UrlEndpoint {
         TARGET_UNKNOWN = 0;
         TARGET_NEW_WINDOW = 1;
     }
-    string url = 1;
-    TargetType target = 2;
+    required string url = 1;
+    optional TargetType target = 2;
 }
 
 message BrowseEndpoint {
-    string browse_id = 2;
-    string params = 3;
-    string canonical_base_url = 4;
+    required string browse_id = 2;
+    required string params = 3;
+    required string canonical_base_url = 4;
 }
 
 message MenuEndpoint {
-    Renderer menu = 1;
+    optional Renderer menu = 1;
 }
 
 message ParamsEndpoint {
-    string params = 1;
+    required string params = 1;
 }
 
 message ClickLoggingWrapperCommand {
-    bool log_as_ve_click = 1;
-    InnertubeCommand command = 2;
+    optional bool log_as_ve_click = 1;
+    optional InnertubeCommand command = 2;
 }
 
 message OpenExternalUrlWithPictureInPictureCommand {
-    string url = 1;
-    GrwOpenInOverride grw_open_in_override = 3;
-    InnertubeCommand termination_command = 4;
+    required string url = 1;
+    optional GrwOpenInOverride grw_open_in_override = 3;
+    optional InnertubeCommand termination_command = 4;
 }
 
 message OptimisticUpdateCommand {
@@ -119,22 +119,22 @@ message SerialCommand {
 }
 
 message LogBackToAppEventCommand {
-    PageType page_type = 1;
+    optional PageType page_type = 1;
 }
 
 message DynamicEntitiesCommand {
     message Transform {
         message Type {
-            int32 type_id = 1;
-            EkoFieldType field_type = 2;
+            optional int32 type_id = 1;
+            optional EkoFieldType field_type = 2;
         }
 
         message Variable {
             message Value {
                 message MessageValue {
                     message Field {
-                        uint32 tag = 1;
-                        Value value = 2;
+                        optional uint32 tag = 1;
+                        optional Value value = 2;
                     }
 
                     repeated Field fields = 1 [packed = false];
@@ -142,51 +142,51 @@ message DynamicEntitiesCommand {
 
                 message VariableValue {
                     message Step {
-                        uint32 field_tag = 1;
+                        optional uint32 field_tag = 1;
                     }
-                    uint32 variable_id = 1;
+                    optional uint32 variable_id = 1;
                     repeated Step steps = 2 [packed = false];
                 }
 
                 message ChooseValue {
                 }
 
-                VariableValue variable_value = 2;
-                MessageValue message_value = 3;
-                ChooseValue choose_value = 4;
+                optional VariableValue variable_value = 2;
+                optional MessageValue message_value = 3;
+                optional ChooseValue choose_value = 4;
             }
-            int32 variable_id = 1;
-            EkoVariableType variable_type = 3;
-            Value value = 4;
+            optional int32 variable_id = 1;
+            optional EkoVariableType variable_type = 3;
+            optional Value value = 4;
         }
 
         repeated Type types = 1 [packed = false];
         repeated Variable variables = 2 [packed = false];
     }
-    SubscriptionConfig subscription_config = 1;
-    Transform transform = 2;
+    optional SubscriptionConfig subscription_config = 1;
+    optional Transform transform = 2;
 }
 
 message PanelLoadingStrategy {
-    ContentElementRenderer inline_content = 1;
+    optional ContentElementRenderer inline_content = 1;
 }
 
 message ShowDialogCommand {
-    PanelLoadingStrategy panel_loading_strategy = 1;
+    optional PanelLoadingStrategy panel_loading_strategy = 1;
 }
 
 message ShowActionSheetCommand {
-    Element footer = 2;
+    optional Element footer = 2;
 }
 
 message OnTap {
-    InnertubeCommand innertube_command                          = 169495254;
-    OptimisticUpdateCommand optimistic_update_command           = 170382629;
+    optional InnertubeCommand innertube_command                          = 169495254;
+    optional OptimisticUpdateCommand optimistic_update_command           = 170382629;
 }
 
 message ContinuationCommand {
-    string token = 1;
-    ContinuationRequestType request = 2;
+    required string token = 1;
+    optional ContinuationRequestType request = 2;
 }
 
 message AppendContinuationItemsAction {
@@ -194,7 +194,7 @@ message AppendContinuationItemsAction {
 }
 
 message InnertubeCommand {
-    bytes click_tracking_params = 2;
+    optional bytes click_tracking_params = 2;
     oneof command {
         ShowDialogCommand show_dialog_command                                                           = 1025;
         BrowseEndpoint browse_endpoint                                                                  = 48687626;
@@ -226,92 +226,92 @@ message InnertubeCommand {
 
 message EngagementPanelExtras {
     message SponsorshipsEngagementPanelExtras {
-        Renderer header = 1;
-        InnertubeCommand content_command = 2;
+        optional Renderer header = 1;
+        optional InnertubeCommand content_command = 2;
     }
 
-    SponsorshipsEngagementPanelExtras sponsorships_engagement_panel_extras = 1;
+    optional SponsorshipsEngagementPanelExtras sponsorships_engagement_panel_extras = 1;
 }
 
 message VideoMetadataViewModel {
     message ExpandButtonData {
-        string a11y_label = 1;
-        bytes tracking_params = 3;
+        required string a11y_label = 1;
+        optional bytes tracking_params = 3;
     }
 
-    StringContent title = 1;
-    OnTap on_tap = 4;
-    bytes tracking_params = 6;
-    ExpandButtonData expand_button_data = 12;
-    ViewModel video_subtitle = 17;
+    optional StringContent title = 1;
+    optional OnTap on_tap = 4;
+    optional bytes tracking_params = 6;
+    optional ExpandButtonData expand_button_data = 12;
+    optional ViewModel video_subtitle = 17;
     repeated ViewModel video_badges = 20 [packed = false];
-    VideoMetadataStyle video_metadata_style = 22;
+    optional VideoMetadataStyle video_metadata_style = 22;
 }
 
 message VideoSubtitleViewModel {
     message BadgesTextData {
-        string text = 1;
-        int32 text_length = 2;
+        required string text = 1;
+        optional int32 text_length = 2;
         repeated Run style_runs = 3 [packed = false];
         repeated Run decoration_runs = 4 [packed = false];
         repeated Run attachment_runs = 5 [packed = false];
-        string a11y_text = 7;
+        required string a11y_text = 7;
     }
 
-    StringKey view_count_entity = 2;
-    StringContent view_count = 3;
-    StringContent date = 4;
-    int32 view_count_length = 5;
-    int32 date_length = 6;
-    StringContent truncation_text = 11;
-    int32 truncation_text_length = 12;
-    OnTap truncation_text_on_tap = 14;
-    string date_a11y_label = 15;
-    BadgesTextData badges_text_data = 16;
-    VideoSubtitleViewModelStyle style = 17;
-    DynamicMetadataAnimationType view_count_animation = 20;
-    StringKey upload_time_entity = 21;
+    optional StringKey view_count_entity = 2;
+    optional StringContent view_count = 3;
+    optional StringContent date = 4;
+    optional int32 view_count_length = 5;
+    optional int32 date_length = 6;
+    optional StringContent truncation_text = 11;
+    optional int32 truncation_text_length = 12;
+    optional OnTap truncation_text_on_tap = 14;
+    required string date_a11y_label = 15;
+    optional BadgesTextData badges_text_data = 16;
+    optional VideoSubtitleViewModelStyle style = 17;
+    optional DynamicMetadataAnimationType view_count_animation = 20;
+    optional StringKey upload_time_entity = 21;
 }
 
 message VideoBadgeViewModel {
-    string label = 1;
-    string icon_name = 2;
-    VideoBadgeViewModelStyle style = 6;
-    bytes tracking_params = 8;
-    string accessibility_label = 9;
+    required string label = 1;
+    required string icon_name = 2;
+    optional VideoBadgeViewModelStyle style = 6;
+    optional bytes tracking_params = 8;
+    required string accessibility_label = 9;
 }
 
 message CompactChannelBarViewModel {
-    bytes tracking_params = 12;
-    float height = 22;
-    ViewModel sponsor_button = 23;
-    ViewModel subscribe_button = 24;
+    optional bytes tracking_params = 12;
+    optional float height = 22;
+    optional ViewModel sponsor_button = 23;
+    optional ViewModel subscribe_button = 24;
 }
 
 message TimedAnimationButtonViewModel {
     message TimedAnimationData {
-        bytes tracking_params = 16;
+        optional bytes tracking_params = 16;
     }
-    ViewModel button_view_model = 1;
-    TimedAnimationData timed_animation_data = 2;
+    optional ViewModel button_view_model = 1;
+    optional TimedAnimationData timed_animation_data = 2;
 }
 
 message SubscriptionStateEntity {
-    string key = 1;
-    bool subscribed = 2;
+    required string key = 1;
+    optional bool subscribed = 2;
 }
 
 message SubscribeButtonViewModel {
     message ButtonContent {
-        string button_text = 1;
-        string accessibility_text = 2;
-        string image_name = 3;
-        SubscriptionStateEntity subscribe_state = 4;
-        OnTap on_tap_command = 5;
+        required string button_text = 1;
+        required string accessibility_text = 2;
+        required string image_name = 3;
+        optional SubscriptionStateEntity subscribe_state = 4;
+        optional OnTap on_tap_command = 5;
     }
 
-    ButtonContent subscribe_button_content = 1;
-    ButtonContent unsubscribe_button_content = 2;
+    optional ButtonContent subscribe_button_content = 1;
+    optional ButtonContent unsubscribe_button_content = 2;
 }
 
 message NotificationBellViewModel {
@@ -327,35 +327,77 @@ message ButtonViewModel {
         string title = 3;
         AttributedString title_formatted = 19;
     }
-    OnTap on_tap = 4;
-    string accessibilityText = 5;
-    ButtonViewModelStyle style = 7;
-    bytes tracking_params = 8;
-    bool is_full_width = 10;
-    ButtonViewModelType type = 11;
-    ButtonViewModelSize button_size = 13;
-    ButtonViewModelState state = 14;
-    string target_id = 30;
-    ProductItem.ThumbnailSource icon_image = 35;
+    optional OnTap on_tap = 4;
+    required string accessibilityText = 5;
+    optional ButtonViewModelStyle style = 7;
+    optional bytes tracking_params = 8;
+    optional bool is_full_width = 10;
+    optional ButtonViewModelType type = 11;
+    optional ButtonViewModelSize button_size = 13;
+    optional ButtonViewModelState state = 14;
+    required string target_id = 30;
+    optional ProductItem.ThumbnailSource icon_image = 35;
 }
 
 message PanelFooterViewModel {
-    ViewModel primary_button = 3;
-    bool should_hide_divider = 6;
+    optional ViewModel primary_button = 3;
+    optional bool should_hide_divider = 6;
 }
 
 message DialogViewModel {
-    ViewModel footer = 2;
-    ViewModel content = 3;
+    optional ViewModel footer = 2;
+    optional ViewModel content = 3;
 
 }
 
 message BasicContentViewModel {
     message Paragraph {
-        AttributedString text = 2;
+        optional AttributedString text = 2;
     }
 
     repeated Paragraph paragraphs = 2 [packed = false];
+}
+
+message PageHeaderViewModel {
+    optional ViewModel title = 2;
+    optional ViewModel image = 3;
+    optional ViewModel metadata = 4;
+    optional ViewModel actions = 5;
+    optional ViewModel description = 6;
+    optional ViewModel attribution = 7;
+    optional ViewModel banner = 10;
+}
+
+message DynamicTextViewModel {
+    optional AttributedString text = 1;
+    optional uint32 max_lines = 2;
+}
+
+message DecoratedAvatarViewModel {
+    optional ViewModel avatar = 1;
+}
+
+message ContentMetadataViewModel {
+    message MetadataRow {
+        message MetadataPart {
+            optional AttributedString text = 2;
+        }
+
+        repeated MetadataPart metadata_parts = 1 [packed = false];
+    }
+
+    repeated MetadataRow metadata_rows = 1 [packed = false];
+    required string delimiter = 2;
+}
+
+message ImageBannerViewModel {
+
+}
+
+message DescriptionPreviewViewModel {
+    optional AttributedString description = 1;
+    optional uint32 max_lines = 2;
+    optional AttributedString truncation_text = 3;
 }
 
 message ViewModel {
@@ -363,52 +405,58 @@ message ViewModel {
         VideoSubtitleViewModel video_subtitle_view_model                = 1017;
         VideoMetadataViewModel video_metadata_view_model                = 1019;
         PanelFooterViewModel panel_footer_view_model                    = 1052;
+        DecoratedAvatarViewModel decorated_avatar_view_model            = 1105;
         CompactChannelBarViewModel compact_channel_bar_view_model       = 1107;
+        ImageBannerViewModel image_banner_view_model                    = 1127;
         BasicContentViewModel basic_content_view_model                  = 1382;
         DialogViewModel dialog_view_model                               = 36852;
         TimedAnimationButtonViewModel timed_animation_button_view_model = 302542834;
         ButtonViewModel button_view_model                               = 461054335;
         VideoBadgeViewModel video_badge_view_model                      = 504944834;
+        PageHeaderViewModel page_header_view_model                      = 508686415;
+        DynamicTextViewModel dynamic_text_view_model                    = 509603841;
+        ContentMetadataViewModel content_metadata_view_model            = 514549827;
         SubscribeButtonViewModel subscribe_button_view_model            = 518912898;
+        DescriptionPreviewViewModel description_preview_view_model      = 524902670;
     }
 }
 
 message IdentifierAndResultPath {
-    string identifier = 1;
+    required string identifier = 1;
     repeated int32 result_path = 2 [packed = false];
-    int32 result_field = 3;
+    optional int32 result_field = 3;
 }
 
 message MappingsAndResultField {
     repeated IdentifierAndResultPath mappings = 1 [packed = false];
-    int32 result_field = 2;
+    optional int32 result_field = 2;
 }
 
 message SubscriptionConfig {
     message EnvironmentSubscriptionConfig {
-        int32 result_field = 1;
-        int32 environment_data_field = 2;
+        optional int32 result_field = 1;
+        optional int32 environment_data_field = 2;
     }
 
-    MappingsAndResultField data_store_subscription_config           = 188490103;
-    EnvironmentSubscriptionConfig environment_subscription_config   = 212323971;
-    MappingsAndResultField theme_subscription_config                = 386334485;
-    MappingsAndResultField capabilities_subscription_config         = 386334486;
+    optional MappingsAndResultField data_store_subscription_config           = 188490103;
+    optional EnvironmentSubscriptionConfig environment_subscription_config   = 212323971;
+    optional MappingsAndResultField theme_subscription_config                = 386334485;
+    optional MappingsAndResultField capabilities_subscription_config         = 386334486;
 }
 
 message ComponentType {
     message TemplateConfig {
-        UriTemplateConfig uri_template_config       = 172035250;
+        optional UriTemplateConfig uri_template_config       = 172035250;
     }
-    TemplateConfig template_config = 3;
+    optional TemplateConfig template_config = 3;
 
-    Model model = 5;
-    SubscriptionConfig subscription_config = 6;
+    optional Model model = 5;
+    optional SubscriptionConfig subscription_config = 6;
 }
 
 message Image {
     message Url {
-        string url = 1;
+        required string url = 1;
     }
 
     repeated Url sources = 1 [packed = false];
@@ -419,27 +467,27 @@ message CellType {
 }
 
 message ImageType {
-    Image image = 1;
+    optional Image image = 1;
 }
 
 message IdentifierProperties {
-    string identifier = 1;
-    string unique_logging_identifier = 6;
+    required string identifier = 1;
+    required string unique_logging_identifier = 6;
 }
 
 message LayoutProperties {
     message Layout {
-        float value = 1;
-        DimensionUnit unit = 2;
+        optional float value = 1;
+        optional DimensionUnit unit = 2;
     }
 
     message Margin {
-        Layout top = 1;
+        optional Layout top = 1;
     }
 
-    Layout height = 2;
-    Layout width = 3;
-    Margin margin = 8;
+    optional Layout height = 2;
+    optional Layout width = 3;
+    optional Margin margin = 8;
 }
 
 message Element {
@@ -452,45 +500,45 @@ message Element {
     }
 
     message Properties {
-        LayoutProperties layout_properties          = 168772996;
-        IdentifierProperties identifier_properties  = 183314536;
+        optional LayoutProperties layout_properties          = 168772996;
+        optional IdentifierProperties identifier_properties  = 183314536;
     }
-    Type type = 1;
-    Properties properties = 2;
+    optional Type type = 1;
+    optional Properties properties = 2;
     repeated Element child_element = 3 [packed = false];
 }
 
 message ElementRenderer {
-    bytes tracking_params = 5;
-    Element new_element                             = 172660663;
+    optional bytes tracking_params = 5;
+    optional Element new_element                             = 172660663;
 }
 
 message ContentElementRenderer {
-    ElementRenderer element_renderer                = 153515154;
+    optional ElementRenderer element_renderer                = 153515154;
 }
 
 message CompanionAdRenderer {
-    bool hack = 1;
-    bytes tracking_params = 9;
+    optional bool hack = 1;
+    optional bytes tracking_params = 9;
 }
 
 message EngagementPanelSectionListRenderer {
-    string panel_identifier = 1;
-    Renderer header = 2;
-    Renderer content = 3;
-    int32 ve_type = 5;
-    bool disable_pull_refresh = 6;
-    EngagementPanelResizability resizability = 13;
-    EngagementPanelAutoplay engagement_planel_autoplay = 17;
-    bool allow_replace = 20;
-    LoggingDirectives logging_directives = 999;
+    required string panel_identifier = 1;
+    optional Renderer header = 2;
+    optional Renderer content = 3;
+    optional int32 ve_type = 5;
+    optional bool disable_pull_refresh = 6;
+    optional EngagementPanelResizability resizability = 13;
+    optional EngagementPanelAutoplay engagement_planel_autoplay = 17;
+    optional bool allow_replace = 20;
+    optional LoggingDirectives logging_directives = 999;
 }
 
 message EngagementPanelTitleHeaderRenderer {
-    TextRuns title = 1;
-    Renderer action_button = 6;
-    bytes tracking_params = 12;
-    Renderer subheader = 19;
+    optional TextRuns title = 1;
+    optional Renderer action_button = 6;
+    optional bytes tracking_params = 12;
+    optional Renderer subheader = 19;
 }
 
 message ContentElementRendererMultiple {
@@ -498,27 +546,27 @@ message ContentElementRendererMultiple {
 }
 
 message ContentElementRendererSingle {
-    ContentElementRenderer content = 1;
+    optional ContentElementRenderer content = 1;
 }
 
 message PlayerOverlayRenderer {
-    Renderer overflow_menu = 2;
+    optional Renderer overflow_menu = 2;
 }
 
 message MenuRenderer {
     repeated Renderer items = 1 [packed = false];
-    bytes tracking_params = 4;
-    Accessibility accessibility = 10;
+    optional bytes tracking_params = 4;
+    optional Accessibility accessibility = 10;
 }
 
 message ReportFormModalRenderer {
-    Renderer options_supported_renderers = 1;
-    bytes tracking_params = 3;
-    TextRuns title = 4;
-    Renderer submit_button = 5;
-    Renderer cancel_button = 6;
+    optional Renderer options_supported_renderers = 1;
+    optional bytes tracking_params = 3;
+    optional TextRuns title = 4;
+    optional Renderer submit_button = 5;
+    optional Renderer cancel_button = 6;
     repeated TextRuns footer = 8;
-    Renderer next_button = 9;
+    optional Renderer next_button = 9;
 }
 
 message ButtonRenderer {
@@ -535,26 +583,26 @@ message ButtonRenderer {
     }
 
     message ElementsButton {
-        string title = 3;
-        InnertubeCommand on_tap = 4;
-        string accessibility_text = 5;
-        ButtonStyle button_style = 7;
-        bytes tracking_params = 8;
-        ButtonType type = 11;
-        ButtonState state = 14;
-        string target_id = 30;
+        required string title = 3;
+        optional InnertubeCommand on_tap = 4;
+        required string accessibility_text = 5;
+        optional ButtonStyle button_style = 7;
+        optional bytes tracking_params = 8;
+        optional ButtonType type = 11;
+        optional ButtonState state = 14;
+        required string target_id = 30;
     }
 
-    Style style = 1;
-    Size size = 2;
-    bool is_disabled = 3;
-    TextRuns text = 5;
-    Icon icon = 8;
-    InnertubeCommand navigation_endpoint = 9;
-    AccessibilityData accessibility = 10;
-    bytes tracking_params = 13;
-    InnertubeCommand command = 19;
-    ElementsButton elements_button = 24;
+    optional Style style = 1;
+    optional Size size = 2;
+    optional bool is_disabled = 3;
+    optional TextRuns text = 5;
+    optional Icon icon = 8;
+    optional InnertubeCommand navigation_endpoint = 9;
+    optional AccessibilityData accessibility = 10;
+    optional bytes tracking_params = 13;
+    optional InnertubeCommand command = 19;
+    optional ElementsButton elements_button = 24;
 }
 
 message OptionsRenderer {
@@ -563,106 +611,106 @@ message OptionsRenderer {
 
 message Continuations {
     message ReloadContinuationData {
-        string continuation = 1;
-        bytes click_tracking_params = 2;
+        required string continuation = 1;
+        optional bytes click_tracking_params = 2;
     }
 
-    ReloadContinuationData reload_continuation_data = 60487319;
+    optional ReloadContinuationData reload_continuation_data = 60487319;
 }
 
 message RendererLabel {
-    AttributedString elements_attributed_string = 5;
+    optional AttributedString elements_attributed_string = 5;
 }
 
 message SectionListRenderer {
     repeated Renderer contents = 1 [packed = false];
-    Continuations continuations = 2;
-    bytes tracking_params = 4;
+    optional Continuations continuations = 2;
+    optional bytes tracking_params = 4;
 }
 
 message SeparatorDetails {
-    bool has_bottom_separator = 1;
+    optional bool has_bottom_separator = 1;
 }
 
 message ItemSectionRenderer {
     repeated ContentElementRenderer contents = 1 [packed = false];
-    bytes tracking_params = 4;
-    bool hide_bottom_separator = 8;
-    SeparatorDetails separator_details = 10;
+    optional bytes tracking_params = 4;
+    optional bool hide_bottom_separator = 8;
+    optional SeparatorDetails separator_details = 10;
 }
 
 message CinematicContainerRenderer {
     message GradientColorConfig {
-        uint32 dark_theme_color = 2;
-        float start_location = 3;
+        optional uint32 dark_theme_color = 2;
+        optional float start_location = 3;
     }
 
     message Config {
         message AnimationConfig {
-            uint32 minImageUpdateIntervalMs = 1;
-            uint32 crossfadeDurationMs = 2;
-            float crossfadeStartOffset = 3;
-            uint32 maxFrameRate = 4;
+            optional uint32 minImageUpdateIntervalMs = 1;
+            optional uint32 crossfadeDurationMs = 2;
+            optional float crossfadeStartOffset = 3;
+            optional uint32 maxFrameRate = 4;
         }
         
         message WatchFullscreenConfig {
-            float colorSourceWidthMultiplier = 1;
-            float colorSourceHeightMultiplier = 2;
-            float scrimWidthMultiplier = 3;
-            float scrimHeightMultiplier = 4;
-            uint32 flatScrimColor = 5;
+            optional float colorSourceWidthMultiplier = 1;
+            optional float colorSourceHeightMultiplier = 2;
+            optional float scrimWidthMultiplier = 3;
+            optional float scrimHeightMultiplier = 4;
+            optional uint32 flatScrimColor = 5;
         }
-        uint32 lightThemeBackgroundColor = 1;
-        uint32 darkThemeBackgroundColor = 2;
-        AnimationConfig animation_config = 3;
-        float colorSourceSizeMultiplier = 4;
-        bool applyClientImageBlur = 5;
-        float bottomColorSourceHeightMultiplier = 6;
-        float maxBottomColorSourceHeight = 7;
-        float colorSourceWidthMultiplier = 8;
-        float colorSourceHeightMultiplier = 9;
-        float blurStrength = 10;
-        bool settingOnByDefault = 11;
-        WatchFullscreenConfig watch_fullscreen_config = 13;
+        optional uint32 lightThemeBackgroundColor = 1;
+        optional uint32 darkThemeBackgroundColor = 2;
+        optional AnimationConfig animation_config = 3;
+        optional float colorSourceSizeMultiplier = 4;
+        optional bool applyClientImageBlur = 5;
+        optional float bottomColorSourceHeightMultiplier = 6;
+        optional float maxBottomColorSourceHeight = 7;
+        optional float colorSourceWidthMultiplier = 8;
+        optional float colorSourceHeightMultiplier = 9;
+        optional float blurStrength = 10;
+        optional bool settingOnByDefault = 11;
+        optional WatchFullscreenConfig watch_fullscreen_config = 13;
     }
 
     repeated GradientColorConfig gradient_color_config = 2 [packed = false];
-    CinematicContainerPresentationStyle presentation_style = 3;
-    Config config = 4;
+    optional CinematicContainerPresentationStyle presentation_style = 3;
+    optional Config config = 4;
 }
 
 message SentimentFactoidRenderer {
-    LikeStatusEntity like_status_entity = 1;
-    Renderer factoid_if_liked = 2;
-    Renderer factoid_if_disliked = 3;
-    Renderer factoid_if_indifferent = 4;
-    StringKey like_count_entity = 5;
+    optional LikeStatusEntity like_status_entity = 1;
+    optional Renderer factoid_if_liked = 2;
+    optional Renderer factoid_if_disliked = 3;
+    optional Renderer factoid_if_indifferent = 4;
+    optional StringKey like_count_entity = 5;
 }
 
 message ViewCountFactoidRenderer {
-    string view_count_entity_key = 1;
-    Renderer factoid = 2;
-    ViewCountFactoidType view_count_type = 3;
+    required string view_count_entity_key = 1;
+    optional Renderer factoid = 2;
+    optional ViewCountFactoidType view_count_type = 3;
 }
 
 message FactoidRenderer {
-    RendererLabel value = 1;
-    RendererLabel label = 2;
-    string accessibility_text = 3;
-    AnimatedValueData animated_value_data = 5;
+    optional RendererLabel value = 1;
+    optional RendererLabel label = 2;
+    required string accessibility_text = 3;
+    optional AnimatedValueData animated_value_data = 5;
 }
 
 message AccessibilityData {
-    string label = 2;
+    required string label = 2;
 }
 
 message Accessibility {
-    AccessibilityData accessibility_data = 75730170;
+    optional AccessibilityData accessibility_data = 75730170;
 }
 
 message TextWithAccessibility {
     repeated TextRun runs = 1 [packed = false];
-    Accessibility accessibility = 3;
+    optional Accessibility accessibility = 3;
 }
 
 message Icon {
@@ -673,22 +721,22 @@ message Icon {
         MORE_VERT = 254;
     }
 
-    IconType icon_type = 1;
+    optional IconType icon_type = 1;
 }
 
 message MenuNavigationItemRenderer {
-    TextWithAccessibility text = 1;
-    Icon icon = 2;
-    InnertubeCommand navigation_endpoint = 3;
-    bytes tracking_params = 5;
+    optional TextWithAccessibility text = 1;
+    optional Icon icon = 2;
+    optional InnertubeCommand navigation_endpoint = 3;
+    optional bytes tracking_params = 5;
 }
 
 message MenuServiceItemRenderer {
-    TextWithAccessibility text = 1;
-    Icon icon = 2;
-    InnertubeCommand service_endpoint = 3;
-    bytes tracking_params = 5;
-    LoggingDirectives logging_directives = 999;
+    optional TextWithAccessibility text = 1;
+    optional Icon icon = 2;
+    optional InnertubeCommand service_endpoint = 3;
+    optional bytes tracking_params = 5;
+    optional LoggingDirectives logging_directives = 999;
 }
 
 message ThumbnailDetails {
@@ -697,68 +745,68 @@ message ThumbnailDetails {
     }
 
     message Thumbnail {
-        string url = 1;
-        int32 width = 2;
-        int32 height = 3;
+        required string url = 1;
+        optional int32 width = 2;
+        optional int32 height = 3;
     }
 
     repeated Thumbnail thumbnails = 1 [packed = false];
 
-    ElementsImage elements_image = 10;
+    optional ElementsImage elements_image = 10;
 }
 
 message MediaLockupRenderer {
-    RendererLabel title = 1;
-    RendererLabel subtitle = 2;
-    ThumbnailDetails thumbnail_details = 3;
-    InnertubeCommand endpoint = 4;
-    bytes tracking_params = 6;
+    optional RendererLabel title = 1;
+    optional RendererLabel subtitle = 2;
+    optional ThumbnailDetails thumbnail_details = 3;
+    optional InnertubeCommand endpoint = 4;
+    optional bytes tracking_params = 6;
 }
 
 message TopicLinkRenderer {
-    RendererLabel title = 1;
-    ThumbnailDetails thumbnail_details = 2;
-    InnertubeCommand endpoint = 3;
-    bytes tracking_params = 6;
+    optional RendererLabel title = 1;
+    optional ThumbnailDetails thumbnail_details = 2;
+    optional InnertubeCommand endpoint = 3;
+    optional bytes tracking_params = 6;
 }
 
 message CompactInfocardRenderer {
-    Renderer content = 1;
-    RendererLabel creator_message = 2;
-    bytes tracking_params = 5;
+    optional Renderer content = 1;
+    optional RendererLabel creator_message = 2;
+    optional bytes tracking_params = 5;
 }
 
 message StructuredDescriptionChannelLockupRenderer {
-    ThumbnailDetails thumbnail = 1;
-    RendererLabel title = 2;
-    RendererLabel subscriber_count_text = 3;
-    InnertubeCommand navigation_endpoint = 4;
-    bytes tracking_params = 6;
-    bool disable_navigation_endpoint = 7;
-    float thumbnail_width = 8;
-    int32 max_lines_title = 9;
-    int32 max_lines_subscriber_count_text = 10;
+    optional ThumbnailDetails thumbnail = 1;
+    optional RendererLabel title = 2;
+    optional RendererLabel subscriber_count_text = 3;
+    optional InnertubeCommand navigation_endpoint = 4;
+    optional bytes tracking_params = 6;
+    optional bool disable_navigation_endpoint = 7;
+    optional float thumbnail_width = 8;
+    optional int32 max_lines_title = 9;
+    optional int32 max_lines_subscriber_count_text = 10;
 }
 
 message RecognitionShelfRenderer {
-    RendererLabel title = 1;
+    optional RendererLabel title = 1;
     repeated ThumbnailDetails avatars = 3 [packed = false];
-    Renderer button = 4;
-    RecognitionShelfSurface surface = 5;
+    optional Renderer button = 4;
+    optional RecognitionShelfSurface surface = 5;
 }
 
 message MiniplayerRenderer {
-    PlaybackMode playback_mode = 1;
+    optional PlaybackMode playback_mode = 1;
 }
 
 message CaptionTrack {
-    string base_url = 1;
-    TextRuns name = 2;
-    string vss_id = 3;
-    string language_code = 4;
-    string kind = 5;
-    bool is_translatable = 7;
-    string track_name = 11;
+    required string base_url = 1;
+    optional TextRuns name = 2;
+    required string vss_id = 3;
+    required string language_code = 4;
+    required string kind = 5;
+    optional bool is_translatable = 7;
+    required string track_name = 11;
 }
 
 message AudioTrack {
@@ -766,58 +814,58 @@ message AudioTrack {
 }
 
 message TranslationLanguage {
-    string language_code = 1;
-    TextRuns language_name = 2;
+    required string language_code = 1;
+    optional TextRuns language_name = 2;
 }
 
 message PlayerCaptionsTracklistRenderer {
     repeated CaptionTrack caption_tracks = 1 [packed = false];
     repeated AudioTrack audio_tracks = 2 [packed = false];
     repeated TranslationLanguage translation_languages = 3 [packed = false];
-    int32 default_audio_track_index = 4;
+    optional int32 default_audio_track_index = 4;
     repeated int32 default_translation_source_track_indices = 6 [packed = false];
 }
 
 message PlayerAttestationRenderer {
-    string challenge = 1;
+    required string challenge = 1;
 }
 
 message PlayerMicroformatRenderer {
     message Embed {
-        string iframe_url = 1;
-        uint32 width = 3;
-        uint32 height = 4;
+        required string iframe_url = 1;
+        optional uint32 width = 3;
+        optional uint32 height = 4;
     }
 
     message LiveBroadcastDetails {
-        bool is_live_now = 1;
-        string start_timestamp = 2;
-        string end_timestamp = 3;
+        optional bool is_live_now = 1;
+        required string start_timestamp = 2;
+        required string end_timestamp = 3;
     }
 
-    ThumbnailDetails thumbnail = 1;
-    Embed embed = 2;
-    TextRuns title = 3;
-    TextRuns description = 4;
-    uint32 length_seconds = 5;
-    string owner_profile_url = 6;
-    string external_channel_id = 8;
-    bool is_family_safe = 9;
+    optional ThumbnailDetails thumbnail = 1;
+    optional Embed embed = 2;
+    optional TextRuns title = 3;
+    optional TextRuns description = 4;
+    optional uint32 length_seconds = 5;
+    required string owner_profile_url = 6;
+    required string external_channel_id = 8;
+    optional bool is_family_safe = 9;
     repeated string available_countries = 10 [packed = false];
-    bool is_unlisted = 11;
-    bool has_ypc_metadata = 12;
-    string view_count = 14;
-    string category = 15;
-    string published_date = 16;
-    string owner_channel_name = 17;
-    LiveBroadcastDetails live_broadcast_details = 18;
-    string upload_date = 19;
-    bool is_shorts_eligible = 22;
+    optional bool is_unlisted = 11;
+    optional bool has_ypc_metadata = 12;
+    required string view_count = 14;
+    required string category = 15;
+    required string published_date = 16;
+    required string owner_channel_name = 17;
+    optional LiveBroadcastDetails live_broadcast_details = 18;
+    required string upload_date = 19;
+    optional bool is_shorts_eligible = 22;
 }
 
 message PlayerErrorMessageRenderer {
-    TextRuns subreason = 1;
-    TextRuns reason = 3;
+    optional TextRuns subreason = 1;
+    optional TextRuns reason = 3;
 }
 
 message SingleColumnWatchNextResultsRenderer {
@@ -825,21 +873,21 @@ message SingleColumnWatchNextResultsRenderer {
 }
 
 message TwoColumnWatchNextResultsRenderer {
-    Renderer results = 1;
-    Renderer secondary_results = 2;
+    optional Renderer results = 1;
+    optional Renderer secondary_results = 2;
 }
 
 message VideoPrimaryInfoRenderer {
-    TextRuns title = 1;
-    Renderer view_count = 3;
-    Renderer video_actions = 4;
+    optional TextRuns title = 1;
+    optional Renderer view_count = 3;
+    optional Renderer video_actions = 4;
 }
 
 message VideoViewCountRenderer {
-    TextRuns view_count = 1;
-    TextRuns extra_short_view_count = 5;
-    string entity_key = 6;
-    uint64 original_view_count = 9;
+    optional TextRuns view_count = 1;
+    optional TextRuns extra_short_view_count = 5;
+    required string entity_key = 6;
+    optional uint64 original_view_count = 9;
 }
 
 message WatchNextSecondaryResultsRenderer {
@@ -847,27 +895,68 @@ message WatchNextSecondaryResultsRenderer {
 }
 
 message CompactVideoRenderer {
-    string video_id = 1;
-    ThumbnailDetails thumbnail = 2;
-    TextRuns title = 3;
-    TextRuns long_byline_text = 4;
-    TextRuns published_time_text = 5;
-    TextRuns view_count_text = 6;
-    TextRuns length_text = 7;
-    InnertubeCommand navigation_endpoint = 8;
-    TextRuns short_byline_text = 10;
+    required string video_id = 1;
+    optional ThumbnailDetails thumbnail = 2;
+    optional TextRuns title = 3;
+    optional TextRuns long_byline_text = 4;
+    optional TextRuns published_time_text = 5;
+    optional TextRuns view_count_text = 6;
+    optional TextRuns length_text = 7;
+    optional InnertubeCommand navigation_endpoint = 8;
+    optional TextRuns short_byline_text = 10;
     repeated Renderer badges = 13 [packed = false];
-    ThumbnailDetails channel_thumbnail = 14;
+    optional ThumbnailDetails channel_thumbnail = 14;
     repeated Renderer owner_badges = 15 [packed = false];
-    bytes trakcing_params = 18;
-    TextRuns short_view_count_text = 23;
-    Renderer menu = 25;
+    optional bytes trakcing_params = 18;
+    optional TextRuns short_view_count_text = 23;
+    optional Renderer menu = 25;
     repeated Renderer thumbnail_overlays = 32 [packed = false];
 }
 
 message ContinuationItemRenderer {
-    ContinuationTrigger trigger = 1;
-    InnertubeCommand continuation_endpoint = 2;
+    optional ContinuationTrigger trigger = 1;
+    optional InnertubeCommand continuation_endpoint = 2;
+}
+
+message InteractiveTabbedHeaderRenderer {
+    optional InteractiveTabbedHeaderRendererType type = 1;
+    optional TextRuns title = 2;
+    optional TextRuns description = 3;
+    optional TextRuns metadata = 4;
+    repeated Renderer badges = 5 [packed = false];
+    optional ThumbnailDetails box_art = 6;
+    optional ThumbnailDetails banner = 7;
+    repeated Renderer buttons = 8 [packed = false];
+    optional TextRuns auto_generated = 9;
+}
+
+message MetadataBadgeRenderer {
+    optional BadgeStyleType style = 2;
+    required string label = 3;
+    optional bytes tracking_params = 6;
+}
+
+message PageHeaderRenderer {
+    required string page_title = 1;
+    optional ViewModel content = 2;
+}
+
+message ChannelMetadataRenderer {
+    required string title = 1;
+    required string description = 2;
+    required string rss_url = 3;
+    required string external_id = 8;
+    required string keywords = 11;
+    repeated string owner_urls = 12;
+    optional ThumbnailDetails avatar = 14;
+    required string channel_url = 15;
+    optional bool is_family_safe = 16;
+    repeated string available_country_codes = 18 [packed = false];
+    required string music_artist_name = 20;
+    required string android_deep_link = 21;
+    required string android_appindexing_link = 24;
+    required string ios_appindexing_link = 25;
+    required string vanity_channel_url = 27;
 }
 
 message Renderer {
@@ -880,6 +969,7 @@ message Renderer {
         TwoColumnWatchNextResultsRenderer two_column_watch_next_results                             = 51779759;
         WatchNextSecondaryResultsRenderer secondary_results                                         = 51779776;
         CompanionAdRenderer companion_ad_renderer                                                   = 55514441;
+        ChannelMetadataRenderer channel_metadata_renderer                                           = 57075253;
         PlayerErrorMessageRenderer player_error_message_renderer                                    = 58356580;
         PlayerMicroformatRenderer player_microformat_renderer                                       = 58514816;
         PlayerAttestationRenderer player_attestation_renderer                                       = 59961494;
@@ -892,9 +982,11 @@ message Renderer {
         PlayerOverlayRenderer player_overlay_renderer                                               = 78882851;
         VideoPrimaryInfoRenderer video_primary_info_renderer                                        = 100048340;
         ReportFormModalRenderer report_form_modal_renderer                                          = 113762946;
+        MetadataBadgeRenderer metadata_badge_renderer                                               = 128361622;
         EngagementPanelSectionListRenderer engagement_panel_section_list_renderer                   = 138681066;
         EngagementPanelTitleHeaderRenderer engagement_panel_title_header_renderer                   = 138681548;
         ContinuationItemRenderer continuation_item_renderer                                         = 159495980;
+        InteractiveTabbedHeaderRenderer interactive_tabbed_header_renderer                          = 188799247;
         MiniplayerRenderer miniplayer_renderer                                                      = 207720144;
         ContentElementRendererMultiple slim_video_metadata_section_renderer                         = 216561405;
         FactoidRenderer factoid_renderer                                                            = 324315956;
@@ -907,53 +999,54 @@ message Renderer {
         ContentElementRendererSingle filter_chip_bar_element_renderer                               = 420115721;
         RecognitionShelfRenderer recognition_shelf_renderer                                         = 432471502;
         CinematicContainerRenderer cinematic_container_renderer                                     = 455752576;
+        PageHeaderRenderer page_header_renderer                                                     = 509923604;
     }
 }
 
 message ProductItem {
     message ThumbnailSource {
-        string url = 1;
-        int32 width = 4;
-        int32 height = 5;
+        required string url = 1;
+        optional int32 width = 4;
+        optional int32 height = 5;
     }
     message VendorInfo {
-        string context = 1;
+        required string context = 1;
         repeated StyleRun style_runs = 6 [packed = false];
     }
-    string product_title = 1;
-    string product_description = 2;
-    string price = 3;
-    string vendor_name = 4;
-    bytes tracking_params = 7;
-    InnertubeCommand on_tap_command = 9;
-    string accessibility_label = 12;
-    string additional_ffes_text = 16;
-    bool stay_in_app = 19;
-    string vendor_logo_url = 24;
-    string cta_description_text = 25;
+    required string product_title = 1;
+    required string product_description = 2;
+    required string price = 3;
+    required string vendor_name = 4;
+    optional bytes tracking_params = 7;
+    optional InnertubeCommand on_tap_command = 9;
+    required string accessibility_label = 12;
+    required string additional_ffes_text = 16;
+    optional bool stay_in_app = 19;
+    required string vendor_logo_url = 24;
+    required string cta_description_text = 25;
     repeated ThumbnailSource thumbnail_sources = 30 [packed = false];
-    VendorInfo vendor_info = 31;
-    uint64 offser_doc_id = 32;
-    bytes featured_product_identifier = 46;
-    bool enable_belly_bar_for_featured_product = 56;
-    string encoded_offer_sku_id = 57;
-    LoggingDirectives logging_directives = 999;
+    optional VendorInfo vendor_info = 31;
+    optional uint64 offser_doc_id = 32;
+    optional bytes featured_product_identifier = 46;
+    optional bool enable_belly_bar_for_featured_product = 56;
+    required string encoded_offer_sku_id = 57;
+    optional LoggingDirectives logging_directives = 999;
 }
 
 message GestureOptions {
     message AccessibilityInfo {
-        string accesibility_label = 1;
+        required string accesibility_label = 1;
     }
 
-    AccessibilityInfo accessibility_info = 1;
+    optional AccessibilityInfo accessibility_info = 1;
 }
 
 message CommandRun {
-    uint32 start_index = 1;
-    uint32 length = 2;
-    InnertubeCommand on_tap = 3;
-    GestureOptions on_tap_options = 5;
-    LoggingDirectives logging_directives = 999;
+    optional uint32 start_index = 1;
+    optional uint32 length = 2;
+    optional InnertubeCommand on_tap = 3;
+    optional GestureOptions on_tap_options = 5;
+    optional LoggingDirectives logging_directives = 999;
 }
 
 message AttachmentRun {
@@ -961,23 +1054,23 @@ message AttachmentRun {
         ALIGNMENT_UNKNOWN = 0;
         ALIGNMENT_VERTICAL_CENTER = 3;
     }
-    uint32 start_index = 1;
-    uint32 length = 2;
-    Element element = 3;
-    Alignment alignment = 4;
+    optional uint32 start_index = 1;
+    optional uint32 length = 2;
+    optional Element element = 3;
+    optional Alignment alignment = 4;
 }
 
 message HighlightTextDecorator {
-    uint32 start_index = 1;
-    uint32 length = 2;
-    uint32 background_color = 3;
-    float background_corner_radius = 4;
-    float bottom_padding = 8;
+    optional uint32 start_index = 1;
+    optional uint32 length = 2;
+    optional uint32 background_color = 3;
+    optional float background_corner_radius = 4;
+    optional float bottom_padding = 8;
 }
 
 message HorizontalFadedScrimTextDecorator {
-    float width = 1;
-    float padding_leading = 2;
+    optional float width = 1;
+    optional float padding_leading = 2;
 }
 
 message TextDecorator {
@@ -988,11 +1081,11 @@ message TextDecorator {
 }
 
 message DecorationRun {
-    TextDecorator text_decorator = 1;
+    optional TextDecorator text_decorator = 1;
 }
 
 message AttributedString {
-    string content = 1;
+    required string content = 1;
     repeated CommandRun command_runs = 5 [packed = false];
     repeated StyleRun style_runs = 6 [packed = false];
     repeated AttachmentRun attachment_runs = 8 [packed = false];
@@ -1000,81 +1093,82 @@ message AttributedString {
 }
 
 message ShoppingLinkItem {
-    string item_title = 1;
-    string url_text = 2;
-    string price_or_status = 4;
+    required string item_title = 1;
+    required string url_text = 2;
+    required string price_or_status = 4;
     repeated ProductItem.ThumbnailSource thumbnail_sources = 6 [packed = false];
-    InnertubeCommand on_tap_command = 7;
-    string accessibility_label = 8;
-    LoggingDirectives logging_directives = 999;
+    optional InnertubeCommand on_tap_command = 7;
+    required string accessibility_label = 8;
+    optional LoggingDirectives logging_directives = 999;
 }
 
 message Model {
     message FilterChipBarModel {
-        Theme theme = 1;
-        string static_key = 2;
-        InnertubeCommand apply_filter_command = 4;
+        optional Theme theme = 1;
+        required string static_key = 2;
+        optional InnertubeCommand apply_filter_command = 4;
     }
 
     message VideoMetadataModel {
-        ModelContext context = 4;
-        ViewModel view_model = 6;
-        bool use_theme_from_context = 16;
+        optional ModelContext context = 4;
+        optional ViewModel view_model = 6;
+        optional bool use_theme_from_context = 16;
     }
 
     message CompactChannelBarModel {
-        ModelContext context = 2;
-        StringKey subscribe_state = 3;
-        ViewModel compact_channel_bar_view_model = 9;
+        optional ModelContext context = 2;
+        optional StringKey subscribe_state = 3;
+        optional ViewModel compact_channel_bar_view_model = 9;
     }
 
     message OverflowMenuItemModel {
+        
     }
 
     message GamingSectionModel {
         message ModelRenderer {
-            RendererLabel section_title = 1;
+            optional RendererLabel section_title = 1;
             repeated Renderer media_lockups = 2 [packed = false];
-            Renderer topic_link = 3;
+            optional Renderer topic_link = 3;
         }
 
-        ModelRenderer renderer = 1;
-        ModelContext context = 3;
+        optional ModelRenderer renderer = 1;
+        optional ModelContext context = 3;
     }
 
     message ProductEngagementPanelModel {
         message StoreButtonData {
-            string button_text = 1;
-            bytes tracking_params = 3;
+            required string button_text = 1;
+            optional bytes tracking_params = 3;
         }
 
-        StoreButtonData store_button_data = 2;
-        string product_endpoint_enttiy_key = 6;
+        optional StoreButtonData store_button_data = 2;
+        required string product_endpoint_enttiy_key = 6;
     }
 
     message ProductItemModel {
-        ProductItem product_item_data = 1;
-        int32 index = 5;
-        ModelContext context = 11;
+        optional ProductItem product_item_data = 1;
+        optional int32 index = 5;
+        optional ModelContext context = 11;
     }
 
     message CellDescriptionBodyModel {
         message BodyRenderer {
             message LoggingData {
-                bytes tracking_params = 2;
+                optional bytes tracking_params = 2;
             }
-            int32 collapsed_line_count = 2;
-            string truncation_text = 3;
-            LoggingData expand_logging_data = 4;
-            LoggingData collapse_logging_data = 5;
-            LoggingData logging_data = 8;
-            AttributedString attributed_description_body_text = 10;
-            bool enable_granular_text_selection = 14;
-            bool enable_stylized_pill_links_custom_a11y_label = 16;
+            optional int32 collapsed_line_count = 2;
+            required string truncation_text = 3;
+            optional LoggingData expand_logging_data = 4;
+            optional LoggingData collapse_logging_data = 5;
+            optional LoggingData logging_data = 8;
+            optional AttributedString attributed_description_body_text = 10;
+            optional bool enable_granular_text_selection = 14;
+            optional bool enable_stylized_pill_links_custom_a11y_label = 16;
         }
 
-        BodyRenderer renderer = 1;
-        ModelContext context = 6;
+        optional BodyRenderer renderer = 1;
+        optional ModelContext context = 6;
     }
 
     message VideoDescriptionHeaderModel {
@@ -1082,99 +1176,99 @@ message Model {
             message ChannelAttributionData {
                 message ChannelAvatar {
 
-                    Image image = 1;
-                    AvatarSize avatar_image_size = 4;
-                    InnertubeCommand endpoint = 5;
+                    optional Image image = 1;
+                    optional AvatarSize avatar_image_size = 4;
+                    optional InnertubeCommand endpoint = 5;
                 }
-                string channel_name = 1;
-                ChannelAvatar channel_avatar = 2;
-                bytes tracking_params = 3;
+                required string channel_name = 1;
+                optional ChannelAvatar channel_avatar = 2;
+                optional bytes tracking_params = 3;
             }
-            StringContent video_title = 1;
-            string channel_name = 2;
-            string view_count_text = 3;
-            string date_text = 4;
+            optional StringContent video_title = 1;
+            required string channel_name = 2;
+            required string view_count_text = 3;
+            required string date_text = 4;
             repeated Renderer factoid_renderer_set = 6 [packed = false];
-            ChannelAttributionData channel_attribution_data = 13;
+            optional ChannelAttributionData channel_attribution_data = 13;
         }
 
-        VideoDescriptionHeader video_description_header = 1;
-        StringKey view_count_entity = 3;
-        ModelContext context = 4;
+        optional VideoDescriptionHeader video_description_header = 1;
+        optional StringKey view_count_entity = 3;
+        optional ModelContext context = 4;
     }
 
     message ExpandableListModel {
         message ExpandableListData {
             message ButtonContent {
-                string text = 1;
-                InnertubeCommand command = 2;
-                bool always_show_button = 3;
-                LoggingDirectives logging_directives = 999;
+                required string text = 1;
+                optional InnertubeCommand command = 2;
+                optional bool always_show_button = 3;
+                optional LoggingDirectives logging_directives = 999;
             }
-            AttributedString title = 1;
-            uint32 default_visible_items_count = 3;
-            bool is_all_affiliate_products = 5;
-            AttributedString subtitle = 7;
+            optional AttributedString title = 1;
+            optional uint32 default_visible_items_count = 3;
+            optional bool is_all_affiliate_products = 5;
+            optional AttributedString subtitle = 7;
             repeated ShoppingLinkItem shopping_link_items = 10 [packed = false];
-            ButtonContent bottom_button = 11;
-            ExpandableListCornerStyle corner_style = 12;
-            LoggingDirectives logging_directives = 999;
+            optional ButtonContent bottom_button = 11;
+            optional ExpandableListCornerStyle corner_style = 12;
+            optional LoggingDirectives logging_directives = 999;
         }
-        ModelContext context = 2;
-        ExpandableListData expandable_list_data = 3;
-        string expanded_state_key = 6;
-        bool match_background_to_description = 9;
+        optional ModelContext context = 2;
+        optional ExpandableListData expandable_list_data = 3;
+        required string expanded_state_key = 6;
+        optional bool match_background_to_description = 9;
     }
 
     message YoutubeModel {
-        ViewModel view_model = 1;
-        ModelContext context = 3;
+        optional ViewModel view_model = 1;
+        optional ModelContext context = 3;
     }
 
     message CellDividerModel {
-        DividerStyle divider_style = 1;
-        float bottom_padding = 5;
-        ModelContext context = 6;
+        optional DividerStyle divider_style = 1;
+        optional float bottom_padding = 5;
+        optional ModelContext context = 6;
     }
 
     message TranscriptSectionModel {
         message ModelRenderer {
-            RendererLabel section_title = 1;
-            RendererLabel sub_header_text = 2;
-            Renderer primary_button = 4;
-            bytes tracking_params = 6;
+            optional RendererLabel section_title = 1;
+            optional RendererLabel sub_header_text = 2;
+            optional Renderer primary_button = 4;
+            optional bytes tracking_params = 6;
         }
 
-        ModelRenderer renderer = 2;
-        ModelContext context = 4;
+        optional ModelRenderer renderer = 2;
+        optional ModelContext context = 4;
     }
 
     message InfocardsSectionModel {
         message ModelRenderer {
-            Renderer creator_videos_button = 3;
-            Renderer creator_about_button = 4;
+            optional Renderer creator_videos_button = 3;
+            optional Renderer creator_about_button = 4;
             repeated Renderer infocards = 5 [packed = false];
-            string infocard_highlight_status_key = 6;
+            required string infocard_highlight_status_key = 6;
             repeated ViewModel creator_custom_url_buttons = 10 [packed = false];
-            bytes tracking_params = 12;
-            ViewModel compact_channel_bar_view_model = 13;
+            optional bytes tracking_params = 12;
+            optional ViewModel compact_channel_bar_view_model = 13;
         }
 
-        ModelRenderer renderer = 1;
-        ModelContext context = 2;
+        optional ModelRenderer renderer = 1;
+        optional ModelContext context = 2;
     }
 
     message BottomSheetFooterModel {
         message FooterContent {
             message IconContent {
-                string icon_name = 1;
+                required string icon_name = 1;
             }
-            string dismiss_text = 1;
-            IconContent icon_content = 2;
+            required string dismiss_text = 1;
+            optional IconContent icon_content = 2;
         }
 
-        FooterContent footer_content = 1;
-        ModelContext context = 4;
+        optional FooterContent footer_content = 1;
+        optional ModelContext context = 4;
     }
 
     oneof models {
