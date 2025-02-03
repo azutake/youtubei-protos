@@ -160,7 +160,7 @@ message FrameworkUpdates {
             message ResourceStatusInResponseCheck {
                 message ResourceStatus {
                     string identifier = 1;
-                    ElementResourceStatus status = 2;
+                    ElementsResourceStatus status = 2;
                 }
 
                 repeated ResourceStatus resource_statuses = 1;

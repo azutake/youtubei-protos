@@ -1,0 +1,13 @@
+syntax = "proto2";
+
+package pfinnertube;
+
+message KeyValuePair {
+    required string key = 1;
+    required string value = 2;
+}
+
+message KeyValuePairUInt32 {
+    required string key = 1;
+    required uint32 value = 2;
+}

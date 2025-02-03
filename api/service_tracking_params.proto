@@ -1,0 +1,16 @@
+syntax = "proto2";
+import "api/key_value_pair.proto";
+
+package pfinnertube;
+
+message ServiceTrackingParams {
+    enum Service {
+        UNKNOWN = 0;
+        GFEEDBACK = 2;
+        BREAKPAD = 3;
+        GUIDED_HELP = 4;
+        ECATCHER = 6;
+    }
+    optional Service service = 1;
+    repeated KeyValuePair params = 2 [packed = false];
+}

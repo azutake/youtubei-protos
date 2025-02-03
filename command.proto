@@ -3,6 +3,7 @@ syntax = "proto2";
 import "common.proto";
 import "theme.proto";
 import "context.proto";
+import "elements/thumbnail_source.proto";
 package pfinnertube;
 
 message TextRun {
@@ -336,7 +337,7 @@ message ButtonViewModel {
     optional ButtonViewModelSize button_size = 13;
     optional ButtonViewModelState state = 14;
     required string target_id = 30;
-    optional ProductItem.ThumbnailSource icon_image = 35;
+    optional ThumbnailSource icon_image = 35;
 }
 
 message PanelFooterViewModel {
@@ -741,7 +742,7 @@ message MenuServiceItemRenderer {
 
 message ThumbnailDetails {
     message ElementsImage {
-        repeated ProductItem.ThumbnailSource sources = 1 [packed = false];
+        repeated ThumbnailSource sources = 1 [packed = false];
     }
 
     message Thumbnail {
@@ -1004,11 +1005,6 @@ message Renderer {
 }
 
 message ProductItem {
-    message ThumbnailSource {
-        required string url = 1;
-        optional int32 width = 4;
-        optional int32 height = 5;
-    }
     message VendorInfo {
         required string context = 1;
         repeated StyleRun style_runs = 6 [packed = false];
@@ -1096,7 +1092,7 @@ message ShoppingLinkItem {
     required string item_title = 1;
     required string url_text = 2;
     required string price_or_status = 4;
-    repeated ProductItem.ThumbnailSource thumbnail_sources = 6 [packed = false];
+    repeated ThumbnailSource thumbnail_sources = 6 [packed = false];
     optional InnertubeCommand on_tap_command = 7;
     required string accessibility_label = 8;
     optional LoggingDirectives logging_directives = 999;

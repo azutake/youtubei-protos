@@ -242,7 +242,7 @@ message FrameworkUpdates {
             message ResourceStatusInResponseCheck {
                 message ResourceStatus {
                     required string identifier = 1;
-                    optional ElementResourceStatus status = 2;
+                    optional ElementsResourceStatus status = 2;
                 }
 
                 repeated ResourceStatus resource_statuses = 1;
