@@ -43,7 +43,8 @@ message CommandExecutorCommand {
 }
 
 message ShowEngagementPanelEndpoint {
-    required string panel_identifier = 1;
+    optional string panel_identifier = 1;
+    optional Renderer engagement_panel = 2;
     optional bool force_portrait = 5;
     optional EngagementPanelExtras engagement_panel_extras = 9;
 }
@@ -169,7 +170,7 @@ message DynamicEntitiesCommand {
 }
 
 message PanelLoadingStrategy {
-    optional ContentElementRenderer inline_content = 1;
+    optional Renderer inline_content = 1;
 }
 
 message ShowDialogCommand {
@@ -399,6 +400,12 @@ message DescriptionPreviewViewModel {
     optional AttributedString description = 1;
     optional uint32 max_lines = 2;
     optional AttributedString truncation_text = 3;
+    optional bool always_show_truncation_text = 4;
+    optional RendererContext renderer_context = 997;
+}
+
+message RendererContext {
+    optional CommandRun command_context = 3;
 }
 
 message ViewModel {
@@ -514,17 +521,13 @@ message ElementRenderer {
     optional Element new_element                             = 172660663;
 }
 
-message ContentElementRenderer {
-    optional ElementRenderer element_renderer                = 153515154;
-}
-
 message CompanionAdRenderer {
     optional bool hack = 1;
     optional bytes tracking_params = 9;
 }
 
 message EngagementPanelSectionListRenderer {
-    required string panel_identifier = 1;
+    optional string panel_identifier = 1;
     optional Renderer header = 2;
     optional Renderer content = 3;
     optional int32 ve_type = 5;
@@ -538,16 +541,17 @@ message EngagementPanelSectionListRenderer {
 message EngagementPanelTitleHeaderRenderer {
     optional TextRuns title = 1;
     optional Renderer action_button = 6;
+    optional Renderer visibility_button = 8;
     optional bytes tracking_params = 12;
     optional Renderer subheader = 19;
 }
 
 message ContentElementRendererMultiple {
-    repeated ContentElementRenderer contents = 1;
+    repeated Renderer contents = 1;
 }
 
 message ContentElementRendererSingle {
-    optional ContentElementRenderer content = 1;
+    optional Renderer content = 1;
 }
 
 message PlayerOverlayRenderer {
@@ -634,7 +638,7 @@ message SeparatorDetails {
 }
 
 message ItemSectionRenderer {
-    repeated ContentElementRenderer contents = 1 [packed = false];
+    repeated Renderer contents = 1 [packed = false];
     optional bytes tracking_params = 4;
     optional bool hide_bottom_separator = 8;
     optional SeparatorDetails separator_details = 10;
@@ -986,6 +990,7 @@ message Renderer {
         MetadataBadgeRenderer metadata_badge_renderer                                               = 128361622;
         EngagementPanelSectionListRenderer engagement_panel_section_list_renderer                   = 138681066;
         EngagementPanelTitleHeaderRenderer engagement_panel_title_header_renderer                   = 138681548;
+        ElementRenderer element_renderer                                                            = 153515154;
         ContinuationItemRenderer continuation_item_renderer                                         = 159495980;
         InteractiveTabbedHeaderRenderer interactive_tabbed_header_renderer                          = 188799247;
         MiniplayerRenderer miniplayer_renderer                                                      = 207720144;
