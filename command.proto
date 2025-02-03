@@ -418,6 +418,12 @@ message AboutChannelViewModel {
     optional string canonical_channel_url = 12;
     optional string channel_id = 13;
     optional AttributedString additional_info_label = 14;
+    optional string video_count_text = 16;
+    repeated ViewModel links = 26 [packed = false];
+}
+
+message ChannelExternalLinkViewModel {
+    optional AttributedString title = 1;
 }
 
 message ViewModel {
@@ -429,6 +435,7 @@ message ViewModel {
         CompactChannelBarViewModel compact_channel_bar_view_model       = 1107;
         ImageBannerViewModel image_banner_view_model                    = 1127;
         BasicContentViewModel basic_content_view_model                  = 1382;
+        ChannelExternalLinkViewModel channel_external_link_view_model   = 22504;
         DialogViewModel dialog_view_model                               = 36852;
         TimedAnimationButtonViewModel timed_animation_button_view_model = 302542834;
         ButtonViewModel button_view_model                               = 461054335;
@@ -477,7 +484,7 @@ message ComponentType {
 
 message Image {
     message Url {
-        required string url = 1;
+        optional string url = 1;
     }
 
     repeated Url sources = 1 [packed = false];
@@ -970,7 +977,7 @@ message ChannelMetadataRenderer {
     required string channel_url = 15;
     optional bool is_family_safe = 16;
     repeated string available_country_codes = 18 [packed = false];
-    required string music_artist_name = 20;
+    optional string music_artist_name = 20;
     required string android_deep_link = 21;
     required string android_appindexing_link = 24;
     required string ios_appindexing_link = 25;
