@@ -7,7 +7,10 @@ package pfinnertube;
 
 message BrowseRequest {
     optional InnerTubeContext context = 1;
-    required string browse_id = 2;
+    oneof request {
+      string browse_id = 2;
+      string continuation = 7;
+    }
 }
 
 message BrowseResponse {
@@ -15,5 +18,5 @@ message BrowseResponse {
   optional Renderer header = 13;
   optional Renderer metadata = 15;
   optional bytes tracking_params = 16;
-
+  repeated InnertubeCommand on_response_received_endpoints = 29 [packed = false];
 }

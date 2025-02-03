@@ -408,6 +408,18 @@ message RendererContext {
     optional CommandRun command_context = 3;
 }
 
+message AboutChannelViewModel {
+    optional string description = 1;
+    optional AttributedString description_label = 2;
+    optional AttributedString custom_links_label = 7;
+    optional string subscriber_count_text = 9;
+    optional string view_count_text = 10;
+    optional AttributedString joined_date_text = 11;
+    optional string canonical_channel_url = 12;
+    optional string channel_id = 13;
+    optional AttributedString additional_info_label = 14;
+}
+
 message ViewModel {
     oneof viewModel {
         VideoSubtitleViewModel video_subtitle_view_model                = 1017;
@@ -425,6 +437,7 @@ message ViewModel {
         DynamicTextViewModel dynamic_text_view_model                    = 509603841;
         ContentMetadataViewModel content_metadata_view_model            = 514549827;
         SubscribeButtonViewModel subscribe_button_view_model            = 518912898;
+        AboutChannelViewModel about_channel_view_model                  = 522039202;
         DescriptionPreviewViewModel description_preview_view_model      = 524902670;
     }
 }
@@ -964,6 +977,10 @@ message ChannelMetadataRenderer {
     required string vanity_channel_url = 27;
 }
 
+message AboutChannelRenderer {
+    optional ViewModel metadata = 1;
+}
+
 message Renderer {
     oneof renderers {
         SectionListRenderer section_list_renderer                                                   = 49399797;
@@ -1006,6 +1023,7 @@ message Renderer {
         RecognitionShelfRenderer recognition_shelf_renderer                                         = 432471502;
         CinematicContainerRenderer cinematic_container_renderer                                     = 455752576;
         PageHeaderRenderer page_header_renderer                                                     = 509923604;
+        AboutChannelRenderer about_channel_renderer                                                 = 520574426;
     }
 }
 
