@@ -195,6 +195,18 @@ message AppendContinuationItemsAction {
     repeated Renderer continuation_items = 2 [packed = false];
 }
 
+message UpdateViewershipAction {
+    optional Renderer view_count = 3;
+}
+
+message UpdateDateTextAction {
+    optional TextRuns date_text = 1;
+}
+
+message UpdateTitleAction {
+    optional TextRuns title = 1;
+}
+
 message InnertubeCommand {
     optional bytes click_tracking_params = 2;
     oneof command {
@@ -207,6 +219,9 @@ message InnertubeCommand {
         FeedbackEndpoint feedback_endpoint                                                              = 65153809;
         SubscribeEndpoint subscribe_endpoint                                                            = 68997349;
         MenuEndpoint menu_endpoint                                                                      = 98150882;
+        UpdateViewershipAction update_viewership_action                                                 = 104886333;
+        UpdateTitleAction update_title_action                                                           = 110027958;
+        UpdateDateTextAction update_date_text_action                                                    = 111447288;
         ParamsEndpoint get_report_form_endpoint                                                         = 113762617;
         ParamsEndpoint ypc_get_offline_upsell_endpoint                                                  = 133724106;
         ShowEngagementPanelEndpoint show_engagement_panel_endpoint                                      = 138681778;
@@ -912,6 +927,8 @@ message VideoViewCountRenderer {
     optional TextRuns view_count = 1;
     optional TextRuns extra_short_view_count = 5;
     required string entity_key = 6;
+    optional TextRuns unlabeled_view_count_value = 7;
+    optional TextRuns view_count_label = 8;
     optional uint64 original_view_count = 9;
 }
 

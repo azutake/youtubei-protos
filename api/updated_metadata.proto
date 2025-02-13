@@ -26,5 +26,6 @@ message Continuation {
 message UpdatedMetadataResponse {
     optional ResponseContext response_context = 1;
     optional Continuation continuation = 3;
+    repeated InnertubeCommand actions = 4 [packed = false];
     optional FrameworkUpdates framework_updates = 777;
 }
